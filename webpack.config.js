@@ -20,7 +20,14 @@ module.exports = {
      stats: 'errors-only',
      open: true,
      port: 9000,
-     compress: true
+     compress: true,
+	 proxy: {
+		 '/api': {
+       target: 'http://localhost:8080',
+       secure: false,
+       changeOrigin: true
+		 }
+     }
 	},
 	module: {
         rules: [{

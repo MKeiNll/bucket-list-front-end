@@ -1,41 +1,28 @@
-import {
-  CREATE_ENTRY,
-  DELETE_ENTRY,
-  SELECT_ENTRY,
-  RECEIVE_ENTRIES
-} from '../actions/index'
+import { APP_HAS_ERRORED, APP_IS_LOADING, FETCH_SUCCESS } from "../actions";
 
-const entries = (state = [], action) => {
+export function error(state = false, action) {
   switch (action.type) {
-    case CREATE_ENTRY:
-      return [
-        ...state,
-        {
-          title: action.title,
-          content: action.content,
-        }
-      ]
-    case DELETE_ENTRY:
-      return [
-        ...state,
-        {
-          id: action.id
-        }
-      ]
-	case SELECT_ENTRY:
-	  return state.map(entry =>
-        entry.id === action.id ? { ...entry, selected: !entry.selected } : entry
-      )
-	case RECEIVE_ENTRIES:
-	  return [
-        ...state,
-        {
-          entries: action.entries
-        }
-      ]
+    case APP_HAS_ERRORED:
+      return action.hasErrored;
     default:
-      return state
+      return state;
   }
 }
 
-export default entries
+export function loading(state = false, action) {
+  switch (action.type) {
+    case APP_IS_LOADING:
+      return action.isLoading;
+    default:
+      return state;
+  }
+}
+
+export function entries(state = [], action) {
+  switch (action.type) {
+    case FETCH_SUCCESS:
+      return action.entries;
+    default:
+      return state;
+  }
+}

@@ -1,46 +1,40 @@
-export const CREATE_ENTRY = 'CREATE_ENTRY'
-function createEntry(title, content) {
+export const APP_HAS_ERRORED = "APP_HAS_ERRORED";
+export function appHasErrored(hasErrored) {
   return {
-	type: 'CREATE_ENTRY',
-    title,
-    content
-  }
+    type: APP_HAS_ERRORED,
+    hasErrored: hasErrored
+  };
 }
 
-export const DELETE_ENTRY = 'DELETE_ENTRY'
-function deleteEntry(id) {
+export const APP_IS_LOADING = "APP_IS_LOADING";
+export function appIsLoading(isLoading) {
   return {
-	type: 'DELETE_ENTRY',
-    id
-  }
+    type: APP_IS_LOADING,
+    isLoading: isLoading
+  };
 }
 
-export const SELECT_ENTRY = 'SELECT_ENTRY'
-function selectEntry(id) {
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export function fetchSuccess(json) {
   return {
-    type: 'SELECT_ENTRY',
-    id
-  }
+    type: FETCH_SUCCESS,
+    entries: json
+  };
 }
 
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
-function receiveEntries(entries) {
-  return {
-    type: RECEIVE_ENTRIES,
-    entries: json.data.children.map(child => child.data)
-  }
-}
-
-export function fetchEntries() {
-  return function(dispatch) {
-	let init = { method: 'GET'};
-    return fetch('/api', init)
-      .then(
-        response => response.json(),
-        error => console.log('An error occurred.', error)
-      )
-      .then(json =>
-        dispatch(receiveEntries(json))
-      )
-  }
+export function fetchData() {
+  return dispatch => {
+    dispatch(appIsLoading(true));
+    let init = { method: "GET" };
+    fetch("/api", init)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch(appIsLoading(false));
+        return response.json();
+      })
+      .then(response => dispatch(fetchSuccess(response)))
+      .catch(() => dispatch(appHasErrored(true)));
+  };
 }

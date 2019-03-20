@@ -1,19 +1,17 @@
-import React from 'react'
-import thunkMiddleware from 'redux-thunk'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import rootReducer from './reducers'
-import App from './components/App'
-import { fetchEntries } from './actions'
+import React from "react";
+import thunkMiddleware from "redux-thunk";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./reducers";
+import AsyncApp from "./containers/AsyncApp";
+import "./styles/main.css";
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-
-let entries = store.dispatch(fetchEntries())
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 render(
   <Provider store={store}>
-    <App fetchedEntries={entries} />
+    <AsyncApp />
   </Provider>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);

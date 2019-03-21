@@ -40,10 +40,11 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(t|j)sx$/,
+        test: /\.(t|j)sx?$/,
         use: {
           loader: "awesome-typescript-loader"
-        }
+        },
+        exclude: /node_modules/
       }
     ]
   }

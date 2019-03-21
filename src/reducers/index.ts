@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { error, loading, entries } from "./entries";
+import { systemReducer } from "./system";
 
-export default combineReducers({
-  error,
-  loading,
-  entries
+export const rootReducer = combineReducers({
+  system: systemReducer
 });
+
+export type AppState = ReturnType<typeof rootReducer>;

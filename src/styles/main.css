@@ -1,3 +1,49 @@
 body {
-  background: teal;
+  background-image: url("bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.title {
+  font-size: xx-large;
+}
+
+.entry {
+  background: white;
+  height: 75px;
+  width: 100%;
+  padding: 15px;
+  margin: 10px;
+}
+
+.entry-title {
+  font-size: large;
+  font-weight: bold;
+  float: left;
+}
+
+.entry-content {
+  font-style: italic;
+  float: left;
+  clear: left;
+  padding-top: 15px;
+}
+
+.entry-list {
+  background: gray;
+  padding: 50px;
+}
+
+.delete-button {
+  background-color: transparent;
+  background-image: url("delete-button.png");
+  height: 50px;
+  width: 50px;
+  float: right;
+}
+
+.delete-button:hover {
+  background-image: url("delete-button_pressed.png");
 }

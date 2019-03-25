@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "public")
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".jpg", ".png"]
   },
   context: path.resolve(__dirname, "src"),
   plugins: [
@@ -45,6 +45,10 @@ module.exports = {
           loader: "awesome-typescript-loader"
         },
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: "url-loader"
       }
     ]
   }

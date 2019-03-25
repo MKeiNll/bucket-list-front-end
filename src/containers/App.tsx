@@ -2,16 +2,32 @@ import * as React from "react";
 import { Component } from "react";
 import EntryList from "../components/EntryList";
 import { connect } from "react-redux";
-import { fetchData } from "../actions/index";
+import { fetchData, deleteEntry, selectEntry } from "../actions/index";
 import { AppState } from "../reducers/index";
-import { SystemState } from "../types/index";
+import { SystemState, Entry } from "../types/index";
 
 interface AppProps {
   system: SystemState;
   update: typeof fetchData;
+  delete: typeof deleteEntry;
+  select: typeof selectEntry;
 }
 
-class App extends Component<AppProps> {
+interface AppStateProps {
+  system: SystemState;
+}
+
+interface AppDispatchProps {
+  update: typeof fetchData;
+  delete: typeof deleteEntry;
+  select: typeof selectEntry;
+}
+
+interface AppOwnProps {
+  system: SystemState;
+}
+
+class App extends Component<AppProps, {}> {
   render() {
     if (this.props.system.hasErrored) {
       return <p>Sorry! There was an error loading the items</p>;
@@ -21,25 +37,31 @@ class App extends Component<AppProps> {
       return <p>Loading…</p>;
     }
 
-    return <EntryList entries={this.props.system.entries} />;
+    return (
+      <EntryList
+        entries={this.props.system.entries}
+        onDeleteButtonClick={this.props.delete}
+        onEntryClick={this.props.select}
+      />
+    );
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.props.update();
-    console.log(this.props);
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: AppState): AppStateProps => ({
   system: state.system
 });
 
-const mapDispatchToProps = dispatch => ({
-  update: () => dispatch(fetchData())
+const mapDispatchToProps = (dispatch): AppDispatchProps => ({
+  update: () => dispatch(fetchData()),
+  delete: (id: number) => dispatch(deleteEntry(id)),
+  select: (entry: Entry) => dispatch(selectEntry(entry))
 });
 
-export default connect<AppProps, {}, {}>(
+export default connect<AppStateProps, AppDispatchProps, AppOwnProps>(
   mapStateToProps,
   mapDispatchToProps
 )(App);

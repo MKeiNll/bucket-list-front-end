@@ -48,3 +48,38 @@ export const fetchData = (): ThunkAction<
     .then(() => dispatch(appIsLoading(false)))
     .catch(() => dispatch(appHasErrored(true)));
 };
+
+export const deleteEntry = (
+  id: number
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(appIsLoading(true));
+  let init = { method: "DELETE" };
+  fetch("/api/" + id, init)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+    })
+    .catch(() => dispatch(appHasErrored(true)))
+    .then(() => dispatch(fetchData()));
+};
+
+export const selectEntry = (
+  entry: Entry
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(appIsLoading(true));
+  entry.selected = !entry.selected;
+  let init = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(entry)
+  };
+  fetch("/api", init)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+    })
+    .catch(() => dispatch(appHasErrored(true)))
+    .then(() => dispatch(fetchData()));
+};

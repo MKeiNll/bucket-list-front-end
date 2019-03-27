@@ -6,8 +6,15 @@ body {
   background-attachment: fixed;
 }
 
+.title-container {
+  height: 100px;
+}
+
 .title {
   font-size: xx-large;
+  float: left;
+  padding-top: 20px;
+  padding-left: 20px;
 }
 
 .entry {
@@ -46,4 +53,11 @@ body {
 
 .delete-button:hover {
   background-image: url("delete-button_pressed.png");
+}
+
+.report-button {
+  background-color: tomato;
+  font-size: x-large;
+  height: 75px;
+  float: right;
 }

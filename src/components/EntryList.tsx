@@ -2,11 +2,16 @@ import * as React from "react";
 import { Component } from "react";
 import Entry from "./Entry";
 
-class EntryList extends Component<any, any> {
+export class EntryList extends Component<any, any> {
   render() {
     return (
       <ul className="entry-list">
-        <span className="title"> BUCKET LIST </span> <br />
+        <div className="title-container">
+          <span className="title"> BUCKET LIST </span>
+          <form action="report">
+            <input type="submit" className="report-button" value="REPORT" />
+          </form>
+        </div>
         {this.props.entries.map(entry => (
           <Entry
             key={entry.id}
@@ -23,5 +28,3 @@ class EntryList extends Component<any, any> {
     );
   }
 }
-
-export default EntryList;

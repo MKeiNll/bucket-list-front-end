@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
-import EntryList from "../components/EntryList";
+import { EntryList } from "../components/EntryList";
+import { EntryCreationForm } from "../components/EntryCreationForm";
 import { connect } from "react-redux";
 import { fetchData, deleteEntry, selectEntry } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -30,7 +31,7 @@ interface AppOwnProps {
 class App extends Component<AppProps, {}> {
   render() {
     if (this.props.system.hasErrored) {
-      return <p>Sorry! There was an error loading the items</p>;
+      return <p>Sorry! There was an error loading the items </p>;
     }
 
     if (this.props.system.isLoading) {
@@ -38,11 +39,11 @@ class App extends Component<AppProps, {}> {
     }
 
     return (
-      <EntryList
+      <div><EntryList
         entries={this.props.system.entries}
         onDeleteButtonClick={this.props.delete}
         onEntryClick={this.props.select}
-      />
+      /><EntryCreationForm /></div>
     );
   }
 
@@ -61,7 +62,5 @@ const mapDispatchToProps = (dispatch): AppDispatchProps => ({
   select: (entry: Entry) => dispatch(selectEntry(entry))
 });
 
-export default connect<AppStateProps, AppDispatchProps, AppOwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect <AppStateProps, AppDispatchProps, AppOwnProps>
+  (mapStateToProps, mapDispatchToProps)(App);

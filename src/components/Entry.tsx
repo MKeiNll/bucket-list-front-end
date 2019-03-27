@@ -12,7 +12,7 @@ const Entry = ({
     style={{
       color: selected ? "blue" : "black"
     }}
-    onClick={e => {
+    onClick={e => { 
       e.stopPropagation();
       onEntryClick();
     }}

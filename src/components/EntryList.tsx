@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Component } from "react";
 import Entry from "./Entry";
+import "../styles/entryList.css";
+import { EntryCreationForm } from "./EntryCreationForm";
 
 export class EntryList extends Component<any, any> {
   render() {
@@ -8,9 +10,6 @@ export class EntryList extends Component<any, any> {
       <ul className="entry-list">
         <div className="title-container">
           <span className="title"> BUCKET LIST </span>
-          <form action="report">
-            <input type="submit" className="report-button" value="REPORT" />
-          </form>
         </div>
         {this.props.entries.map(entry => (
           <Entry
@@ -24,6 +23,7 @@ export class EntryList extends Component<any, any> {
             }}
           />
         ))}
+        <EntryCreationForm />
       </ul>
     );
   }

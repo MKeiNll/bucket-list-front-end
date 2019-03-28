@@ -1,9 +1,13 @@
 import * as React from "react";
+import "../styles/entryCreationForm.css";
 
 export const EntryCreationForm = () => (
-  <form action="report">
-    <input type="text" value="Title" />
-    <input type="text" value="Content" />
-    <input type="submit" value="Submit" />
+  <div className="entryCreationForm">
+  <span className="title">NEW ENTRY</span>
+  <form className="entry-form" action="">
+    <input className="title-input" type="text" placeholder="Title" />
+    <input className="content-input" type="text" placeholder="Content" />
+    <input className="entry-submit" type="submit" value="SUBMIT" />
   </form>
+  </div>
 );

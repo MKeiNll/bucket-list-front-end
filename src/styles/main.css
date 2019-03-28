@@ -1,63 +1,15 @@
 body {
-  background-image: url("bg.jpg");
-  background-repeat: no-repeat;
+  background-image: url("res/bg.jpg");
+  background-repeat: repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 75%;
   background-attachment: fixed;
+  background-color: rgba(0, 0, 0, .075);
+  background-blend-mode: multiply;
 }
 
-.title-container {
-  height: 100px;
-}
-
-.title {
-  font-size: xx-large;
-  float: left;
-  padding-top: 20px;
-  padding-left: 20px;
-}
-
-.entry {
-  background: white;
-  height: 75px;
-  width: 100%;
-  padding: 15px;
-  margin: 10px;
-}
-
-.entry-title {
-  font-size: large;
-  font-weight: bold;
-  float: left;
-}
-
-.entry-content {
-  font-style: italic;
-  float: left;
-  clear: left;
-  padding-top: 15px;
-}
-
-.entry-list {
-  background: gray;
-  padding: 50px;
-}
-
-.delete-button {
-  background-color: transparent;
-  background-image: url("delete-button.png");
-  height: 50px;
-  width: 50px;
-  float: right;
-}
-
-.delete-button:hover {
-  background-image: url("delete-button_pressed.png");
-}
-
-.report-button {
-  background-color: tomato;
-  font-size: x-large;
-  height: 75px;
-  float: right;
+.rootContainer {
+  min-width: 450px;
+  max-width: 800px;
+  margin: 0 auto;
 }

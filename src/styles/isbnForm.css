@@ -1,0 +1,51 @@
+.isbnForm {
+  background-image: url("res/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 25px;
+  border-style: ridge;
+  border-width: 14px;
+  border-radius: 8px;
+  border-color: plum;
+  background-color: rgba(192, 128, 0, .5);
+  background-blend-mode: multiply;
+  margin-bottom: 25px;
+}
+
+.isbn-title {
+  font-weight: bold;
+  font-size: xx-large;
+  padding-top: 20px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  float: left;
+  clear: both;
+}
+
+.bookImage {
+  float: left;
+  clear: both;
+  height: 200px;
+  margin-left: 20px;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
+.isbn-form {
+  clear: both;
+  padding-top: 30px;
+  height: 20px;
+  margin-left: 20px;
+}
+
+.isbn-input {
+  height: 100%;
+  padding-left: 7px;
+}
+
+.isbn-submit {
+  height: 30px;
+  margin-left: 15px;
+}

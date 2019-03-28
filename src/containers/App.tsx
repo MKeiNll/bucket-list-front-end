@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Component } from "react";
 import { EntryList } from "../components/EntryList";
-import { EntryCreationForm } from "../components/EntryCreationForm";
+import { ISBNForm } from "../components/ISBNForm";
+import { ServerStatistics } from "../components/ServerStatistics";
+import { Loading } from "../components/Loading";
 import { connect } from "react-redux";
 import { fetchData, deleteEntry, selectEntry } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -30,20 +32,29 @@ interface AppOwnProps {
 
 class App extends Component<AppProps, {}> {
   render() {
+    let loading;
+
     if (this.props.system.hasErrored) {
       return <p>Sorry! There was an error loading the items </p>;
     }
 
     if (this.props.system.isLoading) {
-      return <p>Loading…</p>;
+      loading = <Loading />;
+    }
+    else {
+      loading = "";
     }
 
     return (
-      <div><EntryList
+      <div className = "rootContainer">
+      {loading}
+      <EntryList
         entries={this.props.system.entries}
         onDeleteButtonClick={this.props.delete}
         onEntryClick={this.props.select}
-      /><EntryCreationForm /></div>
+      /><ISBNForm />
+      <ServerStatistics />
+      </div>
     );
   }
 

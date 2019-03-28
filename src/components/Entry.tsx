@@ -1,4 +1,5 @@
 import * as React from "react";
+import "../styles/entry.css";
 
 const Entry = ({
   selected,
@@ -10,9 +11,9 @@ const Entry = ({
   <li
     className="entry"
     style={{
-      color: selected ? "blue" : "black"
+      background: selected ? "silver" : "whitesmoke"
     }}
-    onClick={e => { 
+    onClick={e => {
       e.stopPropagation();
       onEntryClick();
     }}

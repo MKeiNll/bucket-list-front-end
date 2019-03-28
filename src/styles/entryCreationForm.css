@@ -1,0 +1,43 @@
+.entryCreationForm {
+  background-image: url("res/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-style: ridge;
+  border-width: 14px;
+  border-radius: 8px;
+  border-color: royalBlue;
+  background-color: rgba(0, 128, 255, .5);
+  background-blend-mode: multiply;
+}
+
+.title {
+  font-size: xx-large;
+  padding-top: 20px;
+  padding-left: 20px;
+  float: left;
+}
+
+.entry-form {
+  clear: both;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  height: 20px;
+}
+
+.title-input {
+  height: 100%;
+  padding-left: 7px;
+}
+
+.content-input {
+  height: 100%;
+  padding-left: 7px;
+  margin-left: 15px;
+}
+
+.entry-submit {
+  height: 30px;
+  margin-left: 15px;
+}

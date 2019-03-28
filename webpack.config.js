@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "public")
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".jpg", ".png"]
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".jpg", ".png", ".gif"]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -46,7 +46,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: "url-loader"
       }
     ]

@@ -30,6 +30,8 @@
 .delete-button {
   background-color: transparent;
   background-image: url("res/delete-button.png");
+  background-position: center;
+  background-size: cover;
   height: 50px;
   width: 50px;
   float: right;
@@ -37,5 +39,21 @@
 }
 
 .delete-button:hover {
-  background-image: url("res/delete-button_pressed.png");
+  background-color: lightGrey;
+}
+
+.edit-button {
+  height: 50px;
+  width: 50px;
+  float: right;
+  margin-right: 15px;
+  background-color: transparent;
+  background-image: url("res/edit_button.png");
+  background-position: center;
+  background-size: 75%;
+  background-repeat: no-repeat;
+}
+
+.edit-button:hover {
+  background-color: lightGrey;
 }

@@ -3,7 +3,8 @@ import {
   APP_HAS_ERRORED,
   APP_IS_LOADING,
   ENTRY_FETCH_SUCCESS,
-  ISBN_IMAGE_FETCH_SUCCESS
+  ISBN_IMAGE_FETCH_SUCCESS,
+  ENTRY_BEING_EDITED
 } from "../types";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -34,6 +35,13 @@ export function IsbnImageFetchSuccessAction(imageData: string) {
   return {
     type: ISBN_IMAGE_FETCH_SUCCESS,
     image: imageData
+  };
+}
+
+export function editEntry(id: number) {
+  return {
+    type: ENTRY_BEING_EDITED,
+    id: id
   };
 }
 

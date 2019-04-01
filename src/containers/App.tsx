@@ -10,6 +10,7 @@ import {
   deleteEntry,
   selectEntry,
   createEntry,
+  editEntry,
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -21,6 +22,7 @@ interface AppProps {
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
+  editEntry: typeof editEntry;
   getImage: typeof fetchIsbnImage;
 }
 
@@ -33,6 +35,7 @@ interface AppDispatchProps {
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
+  editEntry: typeof editEntry;
   getImage: typeof fetchIsbnImage;
 }
 
@@ -60,6 +63,7 @@ class App extends Component<AppProps, {}> {
         <EntryList
           entries={this.props.system.entries}
           onDeleteButtonClick={this.props.deleteEntry}
+          onEditButtonClick={this.props.editEntry}
           onEntryClick={this.props.selectEntry}
           onSubmitNewEntryClick={this.props.createEntry}
         />
@@ -87,6 +91,7 @@ const mapDispatchToProps = (dispatch): AppDispatchProps => ({
   selectEntry: (entry: Entry) => dispatch(selectEntry(entry)),
   createEntry: (title: string, content: string) =>
     dispatch(createEntry(title, content)),
+  editEntry: (id: number) => dispatch(editEntry(id)),
   getImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

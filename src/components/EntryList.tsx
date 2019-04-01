@@ -21,6 +21,9 @@ export class EntryList extends Component<any, any> {
             onEntryClick={() => {
               this.props.onEntryClick(entry);
             }}
+            onEditButtonClick={() => {
+              this.props.onEditButtonClick(entry.id);
+            }}
           />
         ))}
         <EntryCreationForm onSubmit={this.props.onSubmitNewEntryClick} />

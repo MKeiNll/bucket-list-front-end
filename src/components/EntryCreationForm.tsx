@@ -31,9 +31,8 @@ export class EntryCreationForm extends React.Component<any, any> {
             name="title"
             required
           />
-          <input
+          <textarea
             className="content-input"
-            type="text"
             placeholder="Content"
             name="content"
             required

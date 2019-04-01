@@ -23,21 +23,48 @@
   padding-top: 30px;
   padding-left: 20px;
   padding-bottom: 20px;
-  height: 20px;
+  height: 250px;
 }
 
 .title-input {
-  height: 100%;
+  float: left;
+  clear: both;
+  height: 20px;
+  width: 40%;
   padding-left: 7px;
+  background-color: lightSteelBlue;
+  border-style: ridge;
+  border-width: 7px;
+  border-radius: 4px;
+  border-color: royalBlue;
 }
 
 .content-input {
-  height: 100%;
+  float: left;
+  clear: both;
+  height: 100px;
+  width: 80%;
   padding-left: 7px;
-  margin-left: 15px;
+  margin-top: 15px;
+  background-color: lightSteelBlue;
+  border-style: ridge;
+  border-width: 7px;
+  border-radius: 4px;
+  border-color: royalBlue;
+  resize: none;
 }
 
 .entry-submit {
-  height: 30px;
-  margin-left: 15px;
+  float: left;
+  clear: both;
+  height: 40px;
+  width: 80px;
+  margin-top: 15px;
+  border-style: ridge;
+  border-width: 7px;
+  border-radius: 4px;
+  border-color: royalBlue;
+  background-color: lightSteelBlue;
+  text-align: center;
+  text-decoration: none;
 }

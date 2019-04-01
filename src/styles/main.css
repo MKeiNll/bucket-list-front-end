@@ -13,3 +13,8 @@
       max-width: 800px;
       margin: 0 auto;
     }
+
+    ::placeholder {
+      color: black;
+      opacity: 1;
+    }

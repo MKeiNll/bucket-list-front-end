@@ -2,7 +2,8 @@ import {
   Entry,
   APP_HAS_ERRORED,
   APP_IS_LOADING,
-  FETCH_SUCCESS
+  ENTRY_FETCH_SUCCESS,
+  ISBN_IMAGE_FETCH_SUCCESS
 } from "../types";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -22,14 +23,21 @@ export function appIsLoading(isLoading: boolean) {
   };
 }
 
-export function fetchSuccess(json: Array<Entry>) {
+export function entryFetchSuccess(json: Array<Entry>) {
   return {
-    type: FETCH_SUCCESS,
+    type: ENTRY_FETCH_SUCCESS,
     entries: json
   };
 }
 
-export const fetchData = (): ThunkAction<
+export function IsbnImageFetchSuccessAction(imageData: string) {
+  return {
+    type: ISBN_IMAGE_FETCH_SUCCESS,
+    image: imageData
+  };
+}
+
+export const fetchEntries = (): ThunkAction<
   void,
   AppState,
   null,
@@ -44,10 +52,30 @@ export const fetchData = (): ThunkAction<
       }
       return response.json();
     })
-    .then(response => dispatch(fetchSuccess(response)))
+    .then(response => dispatch(entryFetchSuccess(response)))
     .then(() => dispatch(appIsLoading(false)))
     .catch(() => dispatch(appHasErrored(true)));
 };
+
+// export const createEntry = (title: string, content: string): ThunkAction<
+//   void,
+//   AppState,
+//   null,
+//   Action<string>
+// > => async dispatch => {
+//   dispatch(appIsLoading(true));
+//   let init = { method: "PUT" };
+//   fetch("/api", init)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw Error(response.statusText);
+//       }
+//       return response.json();
+//     })
+//     .then(response => dispatch(entryFetchSuccess(response)))
+//     .then(() => dispatch(appIsLoading(false)))
+//     .catch(() => dispatch(appHasErrored(true)));
+// };
 
 export const deleteEntry = (
   id: number
@@ -61,7 +89,7 @@ export const deleteEntry = (
       }
     })
     .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchData()));
+    .then(() => dispatch(fetchEntries()));
 };
 
 export const selectEntry = (
@@ -81,5 +109,22 @@ export const selectEntry = (
       }
     })
     .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchData()));
+    .then(() => dispatch(fetchEntries()));
+};
+
+export const fetchIsbnImage = (
+  isbnCode: string
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(appIsLoading(true));
+  let init = { method: "GET" };
+  fetch("/api/data?isbnCode=" + isbnCode, init)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then(response => dispatch(IsbnImageFetchSuccessAction(response.imageData)))
+    .then(() => dispatch(appIsLoading(false)))
+    .catch(() => dispatch(appHasErrored(true)));
 };

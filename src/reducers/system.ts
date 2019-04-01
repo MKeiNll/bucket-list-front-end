@@ -3,13 +3,15 @@ import {
   ActionTypes,
   APP_HAS_ERRORED,
   APP_IS_LOADING,
-  FETCH_SUCCESS
+  ENTRY_FETCH_SUCCESS,
+  ISBN_IMAGE_FETCH_SUCCESS
 } from "../types";
 
 export const initialState: SystemState = {
   entries: [],
   isLoading: true,
-  hasErrored: false
+  hasErrored: false,
+  isbnImage: ""
 };
 
 export function systemReducer(
@@ -21,8 +23,10 @@ export function systemReducer(
       return Object.assign({}, state, { hasErrored: action.hasErrored });
     case APP_IS_LOADING:
       return Object.assign({}, state, { isLoading: action.isLoading });
-    case FETCH_SUCCESS:
+    case ENTRY_FETCH_SUCCESS:
       return Object.assign({}, state, { entries: action.entries });
+    case ISBN_IMAGE_FETCH_SUCCESS:
+      return Object.assign({}, state, { isbnImage: action.image });
     default:
       return state;
   }

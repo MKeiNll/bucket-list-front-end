@@ -5,15 +5,21 @@ import { ISBNForm } from "../components/ISBNForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";
 import { connect } from "react-redux";
-import { fetchData, deleteEntry, selectEntry } from "../actions/index";
+import {
+  fetchEntries,
+  deleteEntry,
+  selectEntry,
+  fetchIsbnImage
+} from "../actions/index";
 import { AppState } from "../reducers/index";
 import { SystemState, Entry } from "../types/index";
 
 interface AppProps {
   system: SystemState;
-  update: typeof fetchData;
-  delete: typeof deleteEntry;
-  select: typeof selectEntry;
+  updateEntries: typeof fetchEntries;
+  deleteEntry: typeof deleteEntry;
+  selectEntry: typeof selectEntry;
+  getImage: typeof fetchIsbnImage;
 }
 
 interface AppStateProps {
@@ -21,9 +27,10 @@ interface AppStateProps {
 }
 
 interface AppDispatchProps {
-  update: typeof fetchData;
-  delete: typeof deleteEntry;
-  select: typeof selectEntry;
+  updateEntries: typeof fetchEntries;
+  deleteEntry: typeof deleteEntry;
+  selectEntry: typeof selectEntry;
+  getImage: typeof fetchIsbnImage;
 }
 
 interface AppOwnProps {
@@ -40,26 +47,29 @@ class App extends Component<AppProps, {}> {
 
     if (this.props.system.isLoading) {
       loading = <Loading />;
-    }
-    else {
+    } else {
       loading = "";
     }
 
     return (
-      <div className = "rootContainer">
-      {loading}
-      <EntryList
-        entries={this.props.system.entries}
-        onDeleteButtonClick={this.props.delete}
-        onEntryClick={this.props.select}
-      /><ISBNForm />
-      <ServerStatistics />
+      <div className="rootContainer">
+        {loading}
+        <EntryList
+          entries={this.props.system.entries}
+          onDeleteButtonClick={this.props.deleteEntry}
+          onEntryClick={this.props.selectEntry}
+        />
+        <ISBNForm
+          image={this.props.system.isbnImage}
+          onSubmit={this.props.getImage}
+        />
+        <ServerStatistics />
       </div>
     );
   }
 
   componentDidMount() {
-    this.props.update();
+    this.props.updateEntries();
   }
 }
 
@@ -68,10 +78,13 @@ const mapStateToProps = (state: AppState): AppStateProps => ({
 });
 
 const mapDispatchToProps = (dispatch): AppDispatchProps => ({
-  update: () => dispatch(fetchData()),
-  delete: (id: number) => dispatch(deleteEntry(id)),
-  select: (entry: Entry) => dispatch(selectEntry(entry))
+  updateEntries: () => dispatch(fetchEntries()),
+  deleteEntry: (id: number) => dispatch(deleteEntry(id)),
+  selectEntry: (entry: Entry) => dispatch(selectEntry(entry)),
+  getImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 
-export default connect <AppStateProps, AppDispatchProps, AppOwnProps>
-  (mapStateToProps, mapDispatchToProps)(App);
+export default connect<AppStateProps, AppDispatchProps, AppOwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

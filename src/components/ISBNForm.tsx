@@ -9,7 +9,7 @@ export class ISBNForm extends React.Component<any, any> {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(event.target.value);
+    this.props.onSubmit(event.target.isbnCode.value);
   }
 
   render() {

@@ -23,7 +23,7 @@ export class EntryList extends Component<any, any> {
             }}
           />
         ))}
-        <EntryCreationForm />
+        <EntryCreationForm onSubmit={this.props.onSubmitNewEntryClick} />
       </ul>
     );
   }

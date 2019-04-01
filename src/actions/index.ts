@@ -57,25 +57,23 @@ export const fetchEntries = (): ThunkAction<
     .catch(() => dispatch(appHasErrored(true)));
 };
 
-// export const createEntry = (title: string, content: string): ThunkAction<
-//   void,
-//   AppState,
-//   null,
-//   Action<string>
-// > => async dispatch => {
-//   dispatch(appIsLoading(true));
-//   let init = { method: "PUT" };
-//   fetch("/api", init)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw Error(response.statusText);
-//       }
-//       return response.json();
-//     })
-//     .then(response => dispatch(entryFetchSuccess(response)))
-//     .then(() => dispatch(appIsLoading(false)))
-//     .catch(() => dispatch(appHasErrored(true)));
-// };
+export const createEntry = (
+  title: string,
+  content: string
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(appIsLoading(true));
+  let data = { title: title, content: content };
+  let init = { method: "PUT" };
+  fetch("/api?title=" + title + "&content=" + content, init)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+    })
+    .then(() => dispatch(appIsLoading(false)))
+    .catch(() => dispatch(appHasErrored(true)))
+    .then(() => dispatch(fetchEntries()));
+};
 
 export const deleteEntry = (
   id: number

@@ -38,7 +38,7 @@ export function IsbnImageFetchSuccessAction(imageData: string) {
   };
 }
 
-export function editEntry(id: number) {
+export function entryBeingEdited(id: number) {
   return {
     type: ENTRY_BEING_EDITED,
     id: id
@@ -103,6 +103,29 @@ export const selectEntry = (
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(appIsLoading(true));
   entry.selected = !entry.selected;
+  let init = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(entry)
+  };
+  fetch("/api", init)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+    })
+    .catch(() => dispatch(appHasErrored(true)))
+    .then(() => dispatch(fetchEntries()));
+};
+
+export const editEntry = (
+  entry: Entry,
+  title: string,
+  content: string
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(appIsLoading(true));
+  entry.title = title;
+  entry.content = content;
   let init = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

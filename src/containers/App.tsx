@@ -8,8 +8,9 @@ import { connect } from "react-redux";
 import {
   fetchEntries,
   deleteEntry,
-  selectEntry,
+  entryBeingEdited,
   createEntry,
+  selectEntry,
   editEntry,
   fetchIsbnImage
 } from "../actions/index";
@@ -22,7 +23,8 @@ interface AppProps {
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
-  editEntry: typeof editEntry;
+  startEditingEntry: typeof entryBeingEdited;
+  submitEditingEntry: typeof editEntry;
   getImage: typeof fetchIsbnImage;
 }
 
@@ -35,7 +37,8 @@ interface AppDispatchProps {
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
-  editEntry: typeof editEntry;
+  startEditingEntry: typeof entryBeingEdited;
+  submitEditingEntry: typeof editEntry;
   getImage: typeof fetchIsbnImage;
 }
 
@@ -63,7 +66,8 @@ class App extends Component<AppProps, {}> {
         <EntryList
           entries={this.props.system.entries}
           onDeleteButtonClick={this.props.deleteEntry}
-          onEditButtonClick={this.props.editEntry}
+          onEditButtonClick={this.props.startEditingEntry}
+          onEditButtonSubmitClick={this.props.submitEditingEntry}
           onEntryClick={this.props.selectEntry}
           onSubmitNewEntryClick={this.props.createEntry}
         />
@@ -91,7 +95,9 @@ const mapDispatchToProps = (dispatch): AppDispatchProps => ({
   selectEntry: (entry: Entry) => dispatch(selectEntry(entry)),
   createEntry: (title: string, content: string) =>
     dispatch(createEntry(title, content)),
-  editEntry: (id: number) => dispatch(editEntry(id)),
+  startEditingEntry: (id: number) => dispatch(entryBeingEdited(id)),
+  submitEditingEntry: (entry: Entry, title: string, content: string) =>
+    dispatch(editEntry(entry, title, content)),
   getImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

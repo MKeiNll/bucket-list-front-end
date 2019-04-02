@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Component } from "react";
-import Entry from "./Entry";
+import { Entry } from "./Entry";
 import "../styles/entryList.css";
 import { EntryCreationForm } from "./EntryCreationForm";
 
@@ -23,6 +23,9 @@ export class EntryList extends Component<any, any> {
             }}
             onEditButtonClick={() => {
               this.props.onEditButtonClick(entry.id);
+            }}
+            onEditButtonSubmitClick={(title, content) => {
+              this.props.onEditButtonSubmitClick(entry, title, content);
             }}
           />
         ))}

@@ -29,12 +29,15 @@ export function systemReducer(
     case ISBN_IMAGE_FETCH_SUCCESS:
       return Object.assign({}, state, { isbnImage: action.image });
     case ENTRY_BEING_EDITED:
-      // let updatedEntries = Object.assign([], ...state.entries);
-      // updatedEntries[action.id].beingEdited = !updatedEntries[action.id]
-      //   .beingEdited;
-      // console.log(Object.assign([], ...state.entries));
-      // return Object.assign({}, state, { entries: updatedEntries });
-      return Object.assign({}, state);
+      const entry = state.entries[action.id - 1];
+      return Object.assign({}, state, {
+        entries: Object.assign(
+          state.entries,
+          Object.assign(entry, {
+            beingEdited: !entry.beingEdited
+          })
+        )
+      });
     default:
       return state;
   }

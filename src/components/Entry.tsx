@@ -3,21 +3,13 @@ import { Component } from "react";
 import "../styles/entry.css";
 
 export class Entry extends Component<any, any> {
+  private titleInput: React.RefObject<HTMLInputElement>;
+  private contentInput: React.RefObject<HTMLTextAreaElement>;
   constructor(props) {
     super(props);
-    this.state = { title: this.props.title, content: this.props.content };
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleContentChange = this.handleContentChange.bind(this);
 
-    // this.titleInput = React.createRef();
-  }
-
-  handleTitleChange(e) {
-    this.setState({ title: e.target.value });
-  }
-
-  handleContentChange(e) {
-    this.setState({ content: e.target.value });
+    this.titleInput = React.createRef();
+    this.contentInput = React.createRef();
   }
 
   render() {
@@ -27,7 +19,7 @@ export class Entry extends Component<any, any> {
       entryContent = (
         <div className="entry-content-container">
           <input
-            // ref={this.titleInput}
+            ref={this.titleInput}
             className="entry-title-edit-form"
             style={{
               background: this.props.selected ? "silver" : "whitesmoke"
@@ -36,17 +28,15 @@ export class Entry extends Component<any, any> {
               e.stopPropagation();
             }}
             defaultValue={this.props.title}
-            onChange={this.handleTitleChange}
             required
           />
           <textarea
-            // ref="contentInput"
+            ref={this.contentInput}
             className="entry-content-edit-form"
             style={{
               background: this.props.selected ? "silver" : "whitesmoke"
             }}
             defaultValue={this.props.content}
-            onChange={this.handleContentChange}
             onClick={e => {
               e.stopPropagation();
             }}
@@ -59,12 +49,9 @@ export class Entry extends Component<any, any> {
           className="edit-button-submit"
           onClick={e => {
             e.stopPropagation();
-            // console.log(this.refs.titleInput.value);
             this.props.onEditButtonSubmitClick(
-              this.state.title,
-              this.state.content
-              // this.refs.titleInput.value,
-              // this.refs.contentInput.value
+              this.titleInput.current!.value,
+              this.contentInput.current!.value
             );
           }}
         />

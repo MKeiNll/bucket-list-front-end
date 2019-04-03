@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Component } from "react";
-  import { EntryList } from "../components/EntryList";
+import { EntryList } from "../components/EntryList";
 import { ISBNForm } from "../components/ISBNForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";

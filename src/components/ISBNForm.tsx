@@ -15,7 +15,12 @@ export class ISBNForm extends React.Component<any, any> {
   render() {
     let bookImage;
     if (this.props.image != "") {
-      bookImage = <img className="bookImage" src={this.props.image} />;
+      bookImage = (
+        <img
+          className="bookImage"
+          src={"data:image/jpeg;base64," + this.props.image}
+        />
+      );
     } else {
       bookImage = "";
     }

@@ -53,7 +53,7 @@ export const fetchEntries = (): ThunkAction<
 > => async dispatch => {
   dispatch(appIsLoading(true));
   let init = { method: "GET" };
-  fetch("/api", init)
+  fetch("/ester", init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -72,7 +72,7 @@ export const createEntry = (
   dispatch(appIsLoading(true));
   let data = { title: title, content: content };
   let init = { method: "PUT" };
-  fetch("/api?title=" + title + "&content=" + content, init)
+  fetch("/ester?title=" + title + "&content=" + content, init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -88,7 +88,7 @@ export const deleteEntry = (
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(appIsLoading(true));
   let init = { method: "DELETE" };
-  fetch("/api/" + id, init)
+  fetch("/ester/" + id, init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -108,7 +108,7 @@ export const selectEntry = (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(entry)
   };
-  fetch("/api", init)
+  fetch("/ester", init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -131,7 +131,7 @@ export const editEntry = (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(entry)
   };
-  fetch("/api", init)
+  fetch("/ester", init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -146,7 +146,7 @@ export const fetchIsbnImage = (
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(appIsLoading(true));
   let init = { method: "GET" };
-  fetch("/api/data?isbnCode=" + isbnCode, init)
+  fetch("/ester/data/getImageByIsbn?isbnCode=" + isbnCode, init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);

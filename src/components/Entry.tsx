@@ -8,6 +8,8 @@ export class Entry extends Component<any, any> {
     this.state = { title: this.props.title, content: this.props.content };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleContentChange = this.handleContentChange.bind(this);
+
+    // this.titleInput = React.createRef();
   }
 
   handleTitleChange(e) {
@@ -25,6 +27,7 @@ export class Entry extends Component<any, any> {
       entryContent = (
         <div className="entry-content-container">
           <input
+            // ref={this.titleInput}
             className="entry-title-edit-form"
             style={{
               background: this.props.selected ? "silver" : "whitesmoke"
@@ -37,6 +40,7 @@ export class Entry extends Component<any, any> {
             required
           />
           <textarea
+            // ref="contentInput"
             className="entry-content-edit-form"
             style={{
               background: this.props.selected ? "silver" : "whitesmoke"
@@ -55,9 +59,12 @@ export class Entry extends Component<any, any> {
           className="edit-button-submit"
           onClick={e => {
             e.stopPropagation();
+            // console.log(this.refs.titleInput.value);
             this.props.onEditButtonSubmitClick(
               this.state.title,
               this.state.content
+              // this.refs.titleInput.value,
+              // this.refs.contentInput.value
             );
           }}
         />

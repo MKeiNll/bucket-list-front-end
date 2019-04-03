@@ -25,7 +25,7 @@ module.exports = {
     port: 9000,
     compress: true,
     proxy: {
-      "/api": {
+      "/ester": {
         target: "http://localhost:8080",
         secure: false,
         changeOrigin: true

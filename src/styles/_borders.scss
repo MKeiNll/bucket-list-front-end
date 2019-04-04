@@ -53,3 +53,10 @@ $tiny-border-radius: 2px;
   border-radius: $small-border-radius;
   border-color: plum;
 }
+
+%error-container-border {
+  border-style: ridge;
+  border-width: $medium-border-width;
+  border-radius: $medium-border-radius;
+  border-color: crimson;
+}

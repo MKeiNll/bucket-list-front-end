@@ -10,6 +10,13 @@
   margin-bottom: auto;
 }
 
+%absolute-screen-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 %tiny-padding-left {
   padding-left: $tiny-margin;
 }

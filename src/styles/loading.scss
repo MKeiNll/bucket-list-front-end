@@ -2,10 +2,7 @@
 
 .loading {
   @extend %loading-background;
+  @extend %absolute-screen-center;
   width: $loading-size;
   height: $loading-size;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

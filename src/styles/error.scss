@@ -1,0 +1,20 @@
+@import "types";
+
+.error-container {
+  @extend %absolute-screen-center;
+  @extend %error-container-border;
+  @extend %title;
+  height: $error-container-height;
+  width: $error-container-width;
+  background-color: $error-container-background-color;
+  font-size: large;
+}
+
+.error {
+  height: $error-height;
+  width: $error-width;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -4,6 +4,7 @@ import { EntryList } from "../components/EntryList";
 import { ISBNForm } from "../components/ISBNForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";
+import { Error } from "../components/Error";
 import { connect } from "react-redux";
 import {
   fetchEntries,
@@ -49,9 +50,12 @@ interface AppOwnProps {
 class App extends Component<AppProps, {}> {
   render() {
     let loading;
+    let error;
 
     if (this.props.system.hasErrored) {
-      return <p>Sorry! There was an error loading the items </p>;
+      error = <Error />;
+    } else {
+      error = "";
     }
 
     if (this.props.system.isLoading) {
@@ -63,6 +67,7 @@ class App extends Component<AppProps, {}> {
     return (
       <div className="root-container">
         {loading}
+        {error}
         <EntryList
           entries={this.props.system.entries}
           onDeleteButtonClick={this.props.deleteEntry}

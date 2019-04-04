@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Component } from "react";
-import "../styles/entry.css";
+import "../styles/entry.scss";
 
 export class Entry extends Component<any, any> {
   private titleInput: React.RefObject<HTMLInputElement>;
@@ -46,7 +46,7 @@ export class Entry extends Component<any, any> {
       );
       editButton = (
         <button
-          className="edit-button-submit"
+          className="entry-submit-button"
           onClick={e => {
             e.stopPropagation();
             this.props.onEditButtonSubmitClick(
@@ -65,7 +65,7 @@ export class Entry extends Component<any, any> {
       );
       editButton = (
         <button
-          className="edit-button"
+          className="entry-edit-button"
           onClick={e => {
             e.stopPropagation();
             this.props.onEditButtonClick();
@@ -90,7 +90,7 @@ export class Entry extends Component<any, any> {
           {entryContent}
           <div className="entry-button-container">
             <button
-              className="delete-button"
+              className="entry-delete-button"
               onClick={e => {
                 e.stopPropagation();
                 this.props.onDeleteButtonClick();

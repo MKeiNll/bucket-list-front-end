@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../styles/isbnForm.css";
+import "../styles/isbnForm.scss";
 
 export class ISBNForm extends React.Component<any, any> {
   constructor(props) {
@@ -17,7 +17,7 @@ export class ISBNForm extends React.Component<any, any> {
     if (this.props.image != "") {
       bookImage = (
         <img
-          className="bookImage"
+          className="isbn-form-image"
           src={"data:image/jpeg;base64," + this.props.image}
         />
       );
@@ -26,18 +26,22 @@ export class ISBNForm extends React.Component<any, any> {
     }
 
     return (
-      <div className="isbnForm">
-        <span className="isbn-title">ISBN</span>
+      <div className="isbn-form">
+        <div className="isbn-form-title">ISBN</div>
         {bookImage}
-        <form className="isbn-form" onSubmit={this.handleSubmit}>
+        <form className="isbn-form-form" onSubmit={this.handleSubmit}>
           <input
-            className="isbn-input"
+            className="isbn-form-input"
             type="text"
             name="isbnCode"
             placeholder="ISBN Code"
             required
           />
-          <input className="isbn-submit" type="submit" value="SUBMIT" />
+          <input
+            className="isbn-form-submit-button"
+            type="submit"
+            value="SUBMIT"
+          />
         </form>
       </div>
     );

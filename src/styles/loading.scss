@@ -1,0 +1,11 @@
+@import "types";
+
+.loading {
+  @extend %loading-background;
+  width: $loading-size;
+  height: $loading-size;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

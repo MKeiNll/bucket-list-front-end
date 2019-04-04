@@ -1,0 +1,26 @@
+@import "types";
+
+body {
+  @extend %root-container-background;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.root-container {
+  @extend %center-horizontal;
+  min-width: $root-container-min-width;
+  max-width: $root-container-max-width;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+}

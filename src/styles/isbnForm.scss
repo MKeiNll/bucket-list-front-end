@@ -1,0 +1,36 @@
+@import "types";
+
+.isbn-form {
+  @extend %isbn-form-background;
+  @extend %isbn-form-border;
+  @extend %small-margin-bottom;
+}
+
+.isbn-form-form {
+  @extend %small-margin-bottom;
+}
+
+.isbn-form-title {
+  @extend %big-title;
+}
+
+.isbn-form-image {
+  @extend %isbn-form-image-background;
+  @extend %medium-margin-left;
+  @extend %small-margin-bottom;
+  height: $isbn-form-image-height;
+}
+
+.isbn-form-input {
+  @extend %isbn-form-input-border;
+  @extend %medium-margin-left;
+  @extend %tiny-padding-left;
+  background-color: $isbn-form-input-background-color;
+}
+
+.isbn-form-submit-button {
+  @extend %isbn-form-input-border;
+  @extend %submit-button;
+  @extend %small-margin-left;
+  background-color: $isbn-form-input-background-color;
+}

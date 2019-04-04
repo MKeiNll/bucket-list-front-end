@@ -1,16 +1,14 @@
 import * as React from "react";
 import { Component } from "react";
 import { Entry } from "./Entry";
-import "../styles/entryList.css";
+import "../styles/entryList.scss";
 import { EntryCreationForm } from "./EntryCreationForm";
 
 export class EntryList extends Component<any, any> {
   render() {
     return (
       <ul className="entry-list">
-        <div className="title-container">
-          <span className="title"> BUCKET LIST </span>
-        </div>
+        <div className="entry-list-title"> BUCKET LIST </div>
         {this.props.entries.map(entry => (
           <Entry
             key={entry.id}

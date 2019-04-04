@@ -1,0 +1,76 @@
+@import "backgrounds", "borders", "sizes";
+
+%center-horizontal {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%center-vertical {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+%tiny-padding-left {
+  padding-left: $tiny-margin;
+}
+
+%small-margin-top-left {
+  margin-top: $small-margin;
+  margin-left: $small-margin;
+}
+
+%small-margin-bottom {
+  margin-bottom: $small-margin;
+}
+
+%small-margin-right {
+  margin-right: $small-margin;
+}
+
+%small-margin-left {
+  margin-left: $small-margin;
+}
+
+%medium-margin-top-left {
+  margin-top: $medium-margin;
+  margin-left: $medium-margin;
+}
+
+%medium-margin-left-right {
+  margin-left: $medium-margin;
+  margin-right: $medium-margin;
+}
+
+%medium-margin-left {
+  margin-left: $medium-margin;
+}
+
+%big-margin-right {
+  margin-right: $big-margin;
+}
+
+%title {
+  font-weight: bold;
+}
+
+%small-title {
+  @extend %title;
+  @extend %small-margin-top-left;
+  font-size: large;
+}
+
+%big-title {
+  @extend %title;
+  @extend %medium-margin-top-left;
+  @extend %small-margin-bottom;
+  font-size: xx-large;
+}
+
+%submit-button {
+  height: 40px;
+  width: 80px;
+  text-align: center;
+  text-decoration: none;
+  font-style: italic;
+  font-weight: bold;
+}

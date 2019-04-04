@@ -1,0 +1,16 @@
+@import "types";
+
+.report-button-form {
+  @extend %center-horizontal;
+  @extend %small-margin-bottom;
+  height: $report-button-container-height;
+  width: $report-button-container-width;
+}
+
+.report-button {
+  background-color: $report-button-background-color;
+  font-size: xx-large;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+}

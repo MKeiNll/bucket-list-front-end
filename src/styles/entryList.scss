@@ -1,0 +1,11 @@
+@import "types";
+
+.entry-list-title {
+  @extend %big-title;
+}
+
+.entry-list {
+  @extend %entry-list-background;
+  @extend %entry-list-border;
+  @extend %small-margin-bottom;
+}

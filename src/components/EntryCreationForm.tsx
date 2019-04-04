@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../styles/entryCreationForm.css";
+import "../styles/entryCreationForm.scss";
 
 export class EntryCreationForm extends React.Component<any, any> {
   constructor(props) {
@@ -23,23 +23,28 @@ export class EntryCreationForm extends React.Component<any, any> {
     }
 
     return (
-      <div className="entryCreationForm">
-        <span className="title">NEW ENTRY</span>
-        <form className="entry-form" onSubmit={this.handleSubmit}>
+      <div className="entry-creation-form">
+        <div className="entry-creation-form-title">NEW ENTRY</div>
+        <form onSubmit={this.handleSubmit}>
           <input
-            className="title-input"
+            className="entry-creation-form-title-input"
             type="text"
             placeholder="Title"
             name="title"
             required
           />
           <textarea
-            className="content-input"
+            className="entry-creation-form-content-input"
             placeholder="Content"
             name="content"
             required
           />
-          <input className="entry-submit" type="submit" value="SUBMIT" />
+          <br />
+          <input
+            className="entry-creation-form-submit-button"
+            type="submit"
+            value="SUBMIT"
+          />
         </form>
       </div>
     );

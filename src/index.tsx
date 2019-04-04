@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./reducers";
 import { initialState } from "./reducers/system";
 import App from "./containers/App";
-import "./styles/main.css";
+import "./styles/main.scss";
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 store.subscribe(() => console.log(store.getState())); // State logging

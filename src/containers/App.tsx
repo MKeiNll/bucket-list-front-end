@@ -61,7 +61,7 @@ class App extends Component<AppProps, {}> {
     }
 
     return (
-      <div className="rootContainer">
+      <div className="root-container">
         {loading}
         <EntryList
           entries={this.props.system.entries}

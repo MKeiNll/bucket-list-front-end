@@ -1,0 +1,55 @@
+$medium-border-width: 14px;
+$medium-border-radius: 8px;
+$small-border-width: 7px;
+$small-border-radius: 4px;
+$tiny-border-width: 4px;
+$tiny-border-radius: 2px;
+
+%entry-list-border {
+  border-style: ridge;
+  border-width: $medium-border-width;
+  border-radius: $medium-border-radius;
+  border-color: darkSeaGreen;
+}
+
+%entry-border {
+  border-style: inset;
+  border-width: $small-border-width;
+  border-radius: $small-border-radius;
+  border-color: lightGray;
+}
+
+%entry-edit-form-border {
+  border-style: inset;
+  border-width: $tiny-border-width;
+  border-radius: $tiny-border-radius;
+  border-color: lightGray;
+}
+
+%entry-creation-form-border {
+  border-style: ridge;
+  border-width: $medium-border-width;
+  border-radius: $medium-border-radius;
+  border-color: royalBlue;
+}
+
+%entry-creation-form-input-border {
+  border-style: ridge;
+  border-width: $small-border-width;
+  border-radius: $small-border-radius;
+  border-color: royalBlue;
+}
+
+%isbn-form-border {
+  border-style: ridge;
+  border-width: $medium-border-width;
+  border-radius: $medium-border-radius;
+  border-color: plum;
+}
+
+%isbn-form-input-border {
+  border-style: ridge;
+  border-width: $small-border-width;
+  border-radius: $small-border-radius;
+  border-color: plum;
+}

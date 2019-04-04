@@ -1,8 +1,8 @@
 import * as React from "react";
-import "../styles/serverStatistics.css";
+import "../styles/serverStatistics.scss";
 
 export const ServerStatistics = () => (
-  <form action="report" className="report-button-container">
+  <form className="report-button-form" action="report">
     <input type="submit" className="report-button" value="SERVER STATISTICS" />
   </form>
 );

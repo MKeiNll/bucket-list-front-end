@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "public")
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".jpg", ".png", ".gif"]
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".jpg", ".png", ".gif", ".scss"]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -34,8 +34,8 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.(t|j)sx?$/,

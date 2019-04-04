@@ -1,0 +1,73 @@
+$entry-background-color: whiteSmoke;
+$button-hover-background-color: lightGrey;
+$entry-creation-form-input-background-color: lightSteelBlue;
+$isbn-form-input-background-color: thistle;
+$report-button-background-color: lightSkyBlue;
+
+%root-container-background {
+  background-image: url("res/bg.jpg");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 75%;
+  background-attachment: scroll;
+  background-color: rgba(0, 0, 0, .075);
+  background-blend-mode: multiply;
+}
+
+%entry-list-background {
+  background-image: url("res/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+%entry-delete-button-background {
+  background-color: transparent;
+  background-image: url("res/delete-button.png");
+  background-position: center;
+  background-size: cover;
+}
+
+%entry-edit-button-background {
+  background-color: transparent;
+  background-image: url("res/edit_button.png");
+  background-position: center;
+  background-size: 75%;
+  background-repeat: no-repeat;
+}
+
+%entry-submit-button-background {
+  background-color: transparent;
+  background-image: url("res/submit_button.png");
+  background-position: center;
+  background-size: 75%;
+  background-repeat: no-repeat;
+}
+
+%entry-creation-form-background {
+  background-image: url("res/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(0, 128, 255, .5);
+  background-blend-mode: multiply;
+}
+
+%isbn-form-background {
+  background-image: url("res/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(192, 128, 0, .5);
+  background-blend-mode: multiply;
+}
+
+%isbn-form-image-background {
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+}
+
+%loading-background {
+  background-image: url("res/loading.gif");
+}

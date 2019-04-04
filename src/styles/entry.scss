@@ -1,0 +1,84 @@
+@import "types";
+
+%entry-button {
+  @extend %small-margin-right;
+  @extend %center-vertical;
+  height: $entry-button-size;
+  width: $entry-button-size;
+}
+
+.entry {
+  @extend %entry-border;
+  @extend %medium-margin-left-right;
+  @extend %small-margin-bottom;
+  background: $entry-background-color;
+}
+
+.entry-title {
+  @extend %small-title;
+}
+
+.entry-content {
+  @extend %small-margin-top-left;
+  @extend %small-margin-bottom;
+  font-style: italic;
+}
+
+.entry-title-edit-form {
+  @extend %entry-edit-form-border;
+  @extend %small-margin-top-left;
+  @extend %big-margin-right;
+  @extend %small-title;
+  background: $entry-background-color;
+}
+
+.entry-content-edit-form {
+  @extend %entry-edit-form-border;
+  @extend %small-margin-top-left;
+  @extend %big-margin-right;
+  @extend %small-margin-bottom;
+  background: $entry-background-color;
+  height: $entry-content-edit-form-height;
+  font-style: italic;
+  resize: none;
+}
+
+.entry-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.entry-content-container {
+  display: flex;
+  flex-direction: column;
+  width: $entry-content-container-width;
+}
+
+.entry-button-container {
+  display: flex;
+  flex-direction: row-reverse;
+  width: $entry-button-container-width;
+}
+
+.entry-delete-button {
+  @extend %entry-delete-button-background;
+  @extend %entry-button;
+}
+
+.entry-delete-button:hover {
+  background-color: $button-hover-background-color;
+}
+
+.entry-edit-button {
+  @extend %entry-edit-button-background;
+  @extend %entry-button;
+}
+
+.entry-submit-button {
+  @extend %entry-submit-button-background;
+  @extend %entry-button;
+}
+
+.entry-edit-button:hover {
+  background-color: $button-hover-background-color;
+}

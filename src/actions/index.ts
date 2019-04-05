@@ -3,6 +3,9 @@ import {
   APP_HAS_ERRORED,
   APP_IS_LOADING,
   ENTRY_FETCH_SUCCESS,
+  CREATE_ENTRY_SUCCESS,
+  DELETE_ENTRY_SUCCESS,
+  SELECT_ENTRY_SUCCESS,
   ISBN_IMAGE_FETCH_SUCCESS,
   ENTRY_BEING_EDITED
 } from "../types";
@@ -31,7 +34,28 @@ export function entryFetchSuccess(json: Array<Entry>) {
   };
 }
 
-export function IsbnImageFetchSuccessAction(imageData: string) {
+export function createEntrySuccess(entry: Entry) {
+  return {
+    type: CREATE_ENTRY_SUCCESS,
+    entry: entry
+  };
+}
+
+export function deleteEntrySuccess(id: number) {
+  return {
+    type: DELETE_ENTRY_SUCCESS,
+    id: id
+  };
+}
+
+export function selectEntrySuccess(id: number) {
+  return {
+    type: SELECT_ENTRY_SUCCESS,
+    id: id
+  };
+}
+
+export function isbnImageFetchSuccessAction(imageData: string) {
   return {
     type: ISBN_IMAGE_FETCH_SUCCESS,
     image: imageData
@@ -77,10 +101,15 @@ export const createEntry = (
       if (!response.ok) {
         throw Error(response.statusText);
       }
+      return response.json();
     })
+    .then(response => {
+      Object.assign(response, { beingEdited: false });
+      return response;
+    })
+    .then(response => dispatch(createEntrySuccess(response)))
     .then(() => dispatch(appIsLoading(false)))
-    .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchEntries()));
+    .catch(() => dispatch(appHasErrored(true)));
 };
 
 export const deleteEntry = (
@@ -94,8 +123,9 @@ export const deleteEntry = (
         throw Error(response.statusText);
       }
     })
-    .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchEntries()));
+    .then(() => dispatch(deleteEntrySuccess(id)))
+    .then(() => dispatch(appIsLoading(false)))
+    .catch(() => dispatch(appHasErrored(true)));
 };
 
 export const selectEntry = (
@@ -113,9 +143,11 @@ export const selectEntry = (
       if (!response.ok) {
         throw Error(response.statusText);
       }
+      return response.json();
     })
-    .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchEntries()));
+    .then(response => dispatch(selectEntrySuccess(response.id)))
+    .then(() => dispatch(appIsLoading(false)))
+    .catch(() => dispatch(appHasErrored(true)));
 };
 
 export const editEntry = (
@@ -153,7 +185,7 @@ export const fetchIsbnImage = (
       }
       return response.json();
     })
-    .then(response => dispatch(IsbnImageFetchSuccessAction(response.imageData)))
+    .then(response => dispatch(isbnImageFetchSuccessAction(response.imageData)))
     .then(() => dispatch(appIsLoading(false)))
     .catch(() => dispatch(appHasErrored(true)));
 };

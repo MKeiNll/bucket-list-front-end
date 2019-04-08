@@ -5,6 +5,13 @@ export class ISBNForm extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showModalView = this.showModalView.bind(this);
+    this.closeModalView = this.closeModalView.bind(this);
+  }
+
+  componentDidMount() {
+    document.body.addEventListener("click", this.closeModalView);
+    this.props.onSubmit("asd");
   }
 
   handleSubmit(event) {
@@ -12,11 +19,26 @@ export class ISBNForm extends React.Component<any, any> {
     this.props.onSubmit(event.target.isbnCode.value);
   }
 
+  showModalView() {
+    let modal = document.getElementById("modalView");
+    if (modal !== null) {
+      modal.style.display = "block";
+    }
+  }
+
+  closeModalView() {
+    let modal = document.getElementById("modalView");
+    if (modal !== null) {
+      modal.style.display = "none";
+    }
+  }
+
   render() {
     let bookImage;
     if (this.props.image != "") {
       bookImage = (
         <img
+          onClick={this.showModalView}
           className="isbn-form-image"
           src={"data:image/jpeg;base64," + this.props.image}
         />
@@ -43,6 +65,9 @@ export class ISBNForm extends React.Component<any, any> {
             value="SUBMIT"
           />
         </form>
+        <div id="modalView" className="isbn-form-modal-view">
+          <iframe className="isbn-form-iframe" src="iframe" />
+        </div>
       </div>
     );
   }

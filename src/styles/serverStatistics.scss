@@ -4,7 +4,7 @@
   @extend %center-horizontal;
   @extend %small-margin-bottom;
   height: $report-button-container-height;
-  width: $report-button-container-width;
+  width: $root-container-min-width;
 }
 
 .report-button {

@@ -46,16 +46,16 @@ export function systemReducer(
       });
       if (selectedEntry !== undefined) {
         // IF I COMMENT THIS LOG, IT STOPS WORKING
-        console.log(
-          Object.assign({}, state, {
-            entries: Object.assign(
-              state.entries,
-              Object.assign(selectedEntry, {
-                selected: !selectedEntry.selected
-              })
-            )
-          })
-        );
+        // console.log(
+        //   Object.assign({}, state, {
+        //     entries: Object.assign(
+        //       state.entries,
+        //       Object.assign(selectedEntry, {
+        //         selected: !selectedEntry.selected
+        //       })
+        //     )
+        //   })
+        // );
         return Object.assign({}, state, {
           entries: Object.assign(
             state.entries,
@@ -73,14 +73,15 @@ export function systemReducer(
         return entry.id === action.id;
       });
       if (entryBeingEdited !== undefined) {
-        return Object.assign({}, state, {
-          entries: Object.assign(
-            state.entries,
-            Object.assign(entryBeingEdited, {
-              beingEdited: !entryBeingEdited.beingEdited
-            })
-          )
-        });
+        // let updatedEntries = [...state.entries];
+        // updatedEntries[
+        //   updatedEntries.indexOf(entryBeingEdited)
+        // ] = Object.assign(entryBeingEdited, {
+        //   beingEdited: !entryBeingEdited.beingEdited
+        // });
+        // return Object.assign({}, state, {
+        //   entries: newEntries
+        // });
       }
       return Object.assign({}, state, { hasErrored: true });
     default:

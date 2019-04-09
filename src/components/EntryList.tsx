@@ -17,7 +17,7 @@ export class EntryList extends Component<any, any> {
               this.props.onDeleteButtonClick(entry.id);
             }}
             onEntryClick={() => {
-              this.props.onEntryClick(entry);
+              this.props.onEntryClick(entry.id);
             }}
             onEditButtonClick={() => {
               this.props.onEditButtonClick(entry.id);

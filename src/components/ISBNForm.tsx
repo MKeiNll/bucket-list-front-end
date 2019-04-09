@@ -11,7 +11,6 @@ export class ISBNForm extends React.Component<any, any> {
 
   componentDidMount() {
     document.body.addEventListener("click", this.closeModalView);
-    this.props.onSubmit("asd");
   }
 
   handleSubmit(event) {

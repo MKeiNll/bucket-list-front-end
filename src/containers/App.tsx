@@ -97,7 +97,7 @@ const mapStateToProps = (state: AppState): AppStateProps => ({
 const mapDispatchToProps = (dispatch): AppDispatchProps => ({
   updateEntries: () => dispatch(fetchEntries()),
   deleteEntry: (id: number) => dispatch(deleteEntry(id)),
-  selectEntry: (entry: Entry) => dispatch(selectEntry(entry)),
+  selectEntry: (id: number) => dispatch(selectEntry(id)),
   createEntry: (title: string, content: string) =>
     dispatch(createEntry(title, content)),
   startEditingEntry: (id: number) => dispatch(entryBeingEdited(id)),

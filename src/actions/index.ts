@@ -129,16 +129,13 @@ export const deleteEntry = (
 };
 
 export const selectEntry = (
-  entry: Entry
+  id: number
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(appIsLoading(true));
-  entry.selected = !entry.selected;
   let init = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(entry)
+    method: "POST"
   };
-  fetch("/ester", init)
+  fetch("/ester/select?id=" + id, init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);

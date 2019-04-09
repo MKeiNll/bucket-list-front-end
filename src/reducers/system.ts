@@ -1,3 +1,4 @@
+import update from "immutability-helper";
 import {
   SystemState,
   ActionTypes,
@@ -24,47 +25,58 @@ export function systemReducer(
 ): SystemState {
   switch (action.type) {
     case APP_HAS_ERRORED:
-      return Object.assign({}, state, { hasErrored: action.hasErrored });
+      return update(state, { hasErrored: { $set: action.hasErrored } });
     case APP_IS_LOADING:
-      return Object.assign({}, state, { isLoading: action.isLoading });
+      return update(state, { isLoading: { $set: action.isLoading } });
     case ENTRY_FETCH_SUCCESS:
-      return Object.assign({}, state, { entries: action.entries });
+      return update(state, { entries: { $set: action.entries } });
     case CREATE_ENTRY_SUCCESS:
-      return Object.assign({}, state, {
-        entries: Object.assign([], [...state.entries, action.entry])
+      return update(state, {
+        entries: { $set: update(state.entries, { $push: [action.entry] }) }
       });
     case DELETE_ENTRY_SUCCESS:
-      const newEntries = state.entries.filter(entry => {
-        return entry.id !== action.id;
-      });
-      return Object.assign({}, state, {
-        entries: newEntries
+      return update(state, {
+        entries: {
+          $set: state.entries.filter(entry => {
+            return entry.id !== action.id;
+          })
+        }
       });
     case SELECT_ENTRY_SUCCESS:
+      console.log("entries: ");
+      console.log(state.entries);
       const selectedEntry = state.entries.find(entry => {
         return entry.id === action.id;
       });
-      if (selectedEntry !== undefined) {
-        // IF I COMMENT THIS LOG, IT STOPS WORKING
-        // console.log(
-        //   Object.assign({}, state, {
-        //     entries: Object.assign(
-        //       state.entries,
-        //       Object.assign(selectedEntry, {
-        //         selected: !selectedEntry.selected
-        //       })
-        //     )
-        //   })
-        // );
-        return Object.assign({}, state, {
-          entries: Object.assign(
-            state.entries,
-            Object.assign(selectedEntry, {
-              selected: !selectedEntry.selected
-            })
-          )
-        });
-      }
+      console.log("selected: ");
+      console.log(selectedEntry);
+      const updatedEntry = update(selectedEntry, {
+        selected: { $set: !selectedEntry!.selected }
+      });
+      console.log("updated: ");
+      console.log(updatedEntry);
+
+      const entries = update(state.entries, {
+        $push: updatedEntry
+      });
+      console.log("entries: ");
+      console.log(entries);
+
+      // return update(state, {
+      //   entries: {
+      //     $set: entries
+      //   }
+      // });
+      // if (selectedEntry !== undefined) {
+      //   return Object.assign({}, state, {
+      //     entries: Object.assign(
+      //       state.entries,
+      //       Object.assign(selectedEntry, {
+      //         selected: !selectedEntry.selected
+      //       })
+      //     )
+      //   });
+      // }
       return Object.assign({}, state, { hasErrored: true });
     case ISBN_IMAGE_FETCH_SUCCESS:
       return Object.assign({}, state, { isbnImage: action.image });
@@ -73,15 +85,15 @@ export function systemReducer(
         return entry.id === action.id;
       });
       if (entryBeingEdited !== undefined) {
-        // let updatedEntries = [...state.entries];
-        // updatedEntries[
-        //   updatedEntries.indexOf(entryBeingEdited)
-        // ] = Object.assign(entryBeingEdited, {
-        //   beingEdited: !entryBeingEdited.beingEdited
-        // });
-        // return Object.assign({}, state, {
-        //   entries: newEntries
-        // });
+        let updatedEntries = [...state.entries];
+        updatedEntries[
+          updatedEntries.indexOf(entryBeingEdited)
+        ] = Object.assign(entryBeingEdited, {
+          beingEdited: !entryBeingEdited.beingEdited
+        });
+        return Object.assign({}, state, {
+          entries: updatedEntries
+        });
       }
       return Object.assign({}, state, { hasErrored: true });
     default:

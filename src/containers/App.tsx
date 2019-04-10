@@ -101,8 +101,8 @@ const mapDispatchToProps = (dispatch): AppDispatchProps => ({
   createEntry: (title: string, content: string) =>
     dispatch(createEntry(title, content)),
   startEditingEntry: (id: number) => dispatch(entryBeingEdited(id)),
-  submitEditingEntry: (entry: Entry, title: string, content: string) =>
-    dispatch(editEntry(entry, title, content)),
+  submitEditingEntry: (id: number, title: string, content: string) =>
+    dispatch(editEntry(id, title, content)),
   getImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

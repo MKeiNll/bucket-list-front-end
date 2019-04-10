@@ -6,6 +6,7 @@ import {
   CREATE_ENTRY_SUCCESS,
   DELETE_ENTRY_SUCCESS,
   SELECT_ENTRY_SUCCESS,
+  EDIT_ENTRY_SUCCESS,
   ISBN_IMAGE_FETCH_SUCCESS,
   ENTRY_BEING_EDITED
 } from "../types";
@@ -55,7 +56,16 @@ export function selectEntrySuccess(id: number) {
   };
 }
 
-export function isbnImageFetchSuccessAction(imageData: string) {
+export function editEntrySuccess(id: number, title: string, content: string) {
+  return {
+    type: EDIT_ENTRY_SUCCESS,
+    id: id,
+    title: title,
+    content: content
+  };
+}
+
+export function isbnImageFetchSuccess(imageData: string) {
   return {
     type: ISBN_IMAGE_FETCH_SUCCESS,
     image: imageData
@@ -135,7 +145,7 @@ export const selectEntry = (
   let init = {
     method: "POST"
   };
-  fetch("/ester/select?id=" + id, init)
+  fetch("/ester/" + id + "/select", init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -148,26 +158,24 @@ export const selectEntry = (
 };
 
 export const editEntry = (
-  entry: Entry,
+  id: number,
   title: string,
   content: string
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(appIsLoading(true));
-  entry.title = title;
-  entry.content = content;
   let init = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(entry)
+    method: "POST"
   };
-  fetch("/ester", init)
+  fetch("/ester/" + id + "/edit?title=" + title + "&content=" + content, init)
     .then(response => {
       if (!response.ok) {
         throw Error(response.statusText);
       }
     })
-    .catch(() => dispatch(appHasErrored(true)))
-    .then(() => dispatch(fetchEntries()));
+    .then(() => dispatch(entryBeingEdited(id)))
+    .then(() => dispatch(editEntrySuccess(id, title, content)))
+    .then(() => dispatch(appIsLoading(false)))
+    .catch(() => dispatch(appHasErrored(true)));
 };
 
 export const fetchIsbnImage = (
@@ -182,7 +190,7 @@ export const fetchIsbnImage = (
       }
       return response.json();
     })
-    .then(response => dispatch(isbnImageFetchSuccessAction(response.imageData)))
+    .then(response => dispatch(isbnImageFetchSuccess(response.imageData)))
     .then(() => dispatch(appIsLoading(false)))
     .catch(() => dispatch(appHasErrored(true)));
 };

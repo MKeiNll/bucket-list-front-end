@@ -23,7 +23,7 @@ export class EntryList extends Component<any, any> {
               this.props.onEditButtonClick(entry.id);
             }}
             onEditButtonSubmitClick={(title, content) => {
-              this.props.onEditButtonSubmitClick(entry, title, content);
+              this.props.onEditButtonSubmitClick(entry.id, title, content);
             }}
           />
         ))}

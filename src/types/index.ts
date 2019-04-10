@@ -19,6 +19,7 @@ export const ENTRY_FETCH_SUCCESS = "FETCH_SUCCESS";
 export const CREATE_ENTRY_SUCCESS = "CREATE_ENTRY_SUCCESS";
 export const DELETE_ENTRY_SUCCESS = "DELETE_ENTRY_SUCCESS";
 export const SELECT_ENTRY_SUCCESS = "SELECT_ENTRY_SUCCESS";
+export const EDIT_ENTRY_SUCCESS = "EDIT_ENTRY_SUCCESS";
 export const ISBN_IMAGE_FETCH_SUCCESS = "ISBN_IMAGE_FETCH_SUCCESS";
 export const ENTRY_BEING_EDITED = "ENTRY_BEING_EDITED";
 
@@ -52,6 +53,13 @@ interface SelectEntrySuccessAction {
   id: number;
 }
 
+interface EditEntrySuccessAction {
+  type: typeof EDIT_ENTRY_SUCCESS;
+  id: number;
+  title: string;
+  content: string;
+}
+
 interface IsbnImageFetchSuccessAction {
   type: typeof ISBN_IMAGE_FETCH_SUCCESS;
   image: string;
@@ -69,5 +77,6 @@ export type ActionTypes =
   | CreateEntrySuccessAction
   | DeleteEntrySuccessAction
   | SelectEntrySuccessAction
+  | EditEntrySuccessAction
   | IsbnImageFetchSuccessAction
   | EntryBeingEdited;

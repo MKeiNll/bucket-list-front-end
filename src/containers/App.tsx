@@ -7,44 +7,44 @@ import { Loading } from "../components/Loading";
 import { Error } from "../components/Error";
 import { connect } from "react-redux";
 import {
-  fetchEntries,
+  initialFetch,
   deleteEntry,
-  entryBeingEdited,
+  editEntry,
   createEntry,
   selectEntry,
-  editEntry,
+  submitEntryEdits,
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
 import { SystemState, Entry } from "../types/index";
 
 interface AppProps {
-  system: SystemState;
-  updateEntries: typeof fetchEntries;
+  systemState: SystemState;
+  initialFetch: typeof initialFetch;
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
-  startEditingEntry: typeof entryBeingEdited;
-  submitEditingEntry: typeof editEntry;
-  getImage: typeof fetchIsbnImage;
+  editEntry: typeof editEntry;
+  submitEntryEdits: typeof submitEntryEdits;
+  fetchIsbnImage: typeof fetchIsbnImage;
 }
 
 interface AppStateProps {
-  system: SystemState;
+  systemState: SystemState;
 }
 
 interface AppDispatchProps {
-  updateEntries: typeof fetchEntries;
+  initialFetch: typeof initialFetch;
   deleteEntry: typeof deleteEntry;
   selectEntry: typeof selectEntry;
   createEntry: typeof createEntry;
-  startEditingEntry: typeof entryBeingEdited;
-  submitEditingEntry: typeof editEntry;
-  getImage: typeof fetchIsbnImage;
+  editEntry: typeof editEntry;
+  submitEntryEdits: typeof submitEntryEdits;
+  fetchIsbnImage: typeof fetchIsbnImage;
 }
 
 interface AppOwnProps {
-  system: SystemState;
+  systemState: SystemState;
 }
 
 class App extends Component<AppProps, {}> {
@@ -52,13 +52,13 @@ class App extends Component<AppProps, {}> {
     let loading;
     let error;
 
-    if (this.props.system.hasErrored) {
+    if (this.props.systemState.error) {
       error = <Error />;
     } else {
       error = "";
     }
 
-    if (this.props.system.isLoading) {
+    if (this.props.systemState.loading) {
       loading = <Loading />;
     } else {
       loading = "";
@@ -69,16 +69,16 @@ class App extends Component<AppProps, {}> {
         {loading}
         {error}
         <EntryList
-          entries={this.props.system.entries}
-          onDeleteButtonClick={this.props.deleteEntry}
-          onEditButtonClick={this.props.startEditingEntry}
-          onEditButtonSubmitClick={this.props.submitEditingEntry}
-          onEntryClick={this.props.selectEntry}
-          onSubmitNewEntryClick={this.props.createEntry}
+          entries={this.props.systemState.entries}
+          deleteEntry={this.props.deleteEntry}
+          editEntry={this.props.editEntry}
+          submitEntryEdits={this.props.submitEntryEdits}
+          selectEntry={this.props.selectEntry}
+          createEntry={this.props.createEntry}
         />
         <ISBNForm
-          image={this.props.system.isbnImage}
-          onSubmit={this.props.getImage}
+          image={this.props.systemState.isbnImage}
+          onSubmit={this.props.fetchIsbnImage}
         />
         <ServerStatistics />
       </div>
@@ -86,24 +86,24 @@ class App extends Component<AppProps, {}> {
   }
 
   componentDidMount() {
-    this.props.updateEntries();
+    this.props.initialFetch();
   }
 }
 
 const mapStateToProps = (state: AppState): AppStateProps => ({
-  system: state.system
+  systemState: state.system
 });
 
 const mapDispatchToProps = (dispatch): AppDispatchProps => ({
-  updateEntries: () => dispatch(fetchEntries()),
+  initialFetch: () => dispatch(initialFetch()),
   deleteEntry: (id: number) => dispatch(deleteEntry(id)),
   selectEntry: (id: number) => dispatch(selectEntry(id)),
   createEntry: (title: string, content: string) =>
     dispatch(createEntry(title, content)),
-  startEditingEntry: (id: number) => dispatch(entryBeingEdited(id)),
-  submitEditingEntry: (id: number, title: string, content: string) =>
-    dispatch(editEntry(id, title, content)),
-  getImage: (image: string) => dispatch(fetchIsbnImage(image))
+  editEntry: (id: number, edit: boolean) => dispatch(editEntry(id, edit)),
+  submitEntryEdits: (id: number, title: string, content: string) =>
+    dispatch(submitEntryEdits(id, title, content)),
+  fetchIsbnImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 
 export default connect<AppStateProps, AppDispatchProps, AppOwnProps>(

@@ -1,21 +1,21 @@
 import {
   SystemState,
   ActionTypes,
-  APP_HAS_ERRORED,
-  APP_IS_LOADING,
-  ENTRY_FETCH_SUCCESS,
+  ERROR,
+  LOADING,
+  INITIAL_FETCH_SUCCESS,
   CREATE_ENTRY_SUCCESS,
   DELETE_ENTRY_SUCCESS,
   SELECT_ENTRY_SUCCESS,
-  EDIT_ENTRY_SUCCESS,
-  ISBN_IMAGE_FETCH_SUCCESS,
-  ENTRY_BEING_EDITED
+  SUBMIT_ENTRY_EDITS_SUCCESS,
+  EDIT_ENTRY,
+  ISBN_IMAGE_FETCH_SUCCESS
 } from "../types";
 
 export const initialState: SystemState = {
   entries: [],
-  isLoading: true,
-  hasErrored: false,
+  loading: true,
+  error: false,
   isbnImage: ""
 };
 
@@ -24,11 +24,11 @@ export function systemReducer(
   action: ActionTypes
 ): SystemState {
   switch (action.type) {
-    case APP_HAS_ERRORED:
-      return { ...state, hasErrored: action.hasErrored };
-    case APP_IS_LOADING:
-      return { ...state, isLoading: action.isLoading };
-    case ENTRY_FETCH_SUCCESS:
+    case ERROR:
+      return { ...state, error: true };
+    case LOADING:
+      return { ...state, loading: action.loading };
+    case INITIAL_FETCH_SUCCESS:
       return { ...state, entries: action.entries };
     case CREATE_ENTRY_SUCCESS:
       return {
@@ -55,18 +55,18 @@ export function systemReducer(
       };
     case ISBN_IMAGE_FETCH_SUCCESS:
       return { ...state, isbnImage: action.image };
-    case ENTRY_BEING_EDITED:
+    case EDIT_ENTRY:
       return {
         ...state,
         entries: state.entries.map(entry => {
           if (entry.id === action.id) {
-            return { ...entry, beingEdited: !entry.beingEdited };
+            return { ...entry, beingEdited: action.edit };
           } else {
             return entry;
           }
         })
       };
-    case EDIT_ENTRY_SUCCESS:
+    case SUBMIT_ENTRY_EDITS_SUCCESS:
       return {
         ...state,
         entries: state.entries.map(entry => {

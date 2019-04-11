@@ -13,21 +13,21 @@ export class EntryList extends Component<any, any> {
           <Entry
             key={entry.id}
             {...entry}
-            onDeleteButtonClick={() => {
-              this.props.onDeleteButtonClick(entry.id);
+            deleteEntry={() => {
+              this.props.deleteEntry(entry.id);
             }}
-            onEntryClick={() => {
-              this.props.onEntryClick(entry.id);
+            selectEntry={() => {
+              this.props.selectEntry(entry.id);
             }}
-            onEditButtonClick={() => {
-              this.props.onEditButtonClick(entry.id);
+            editEntry={edit => {
+              this.props.editEntry(entry.id, edit);
             }}
-            onEditButtonSubmitClick={(title, content) => {
-              this.props.onEditButtonSubmitClick(entry.id, title, content);
+            submitEntryEdits={(title, content) => {
+              this.props.submitEntryEdits(entry.id, title, content);
             }}
           />
         ))}
-        <EntryCreationForm onSubmit={this.props.onSubmitNewEntryClick} />
+        <EntryCreationForm onSubmit={this.props.createEntry} />
       </ul>
     );
   }

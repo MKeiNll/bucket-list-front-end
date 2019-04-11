@@ -2,6 +2,10 @@ import * as React from "react";
 import { Component } from "react";
 import "../styles/entry.scss";
 
+// interface EntryProps {
+//   deleteEntry:
+// }
+
 export class Entry extends Component<any, any> {
   private titleInput: React.RefObject<HTMLInputElement>;
   private contentInput: React.RefObject<HTMLTextAreaElement>;
@@ -49,10 +53,16 @@ export class Entry extends Component<any, any> {
           className="entry-submit-button"
           onClick={e => {
             e.stopPropagation();
-            this.props.onEditButtonSubmitClick(
-              this.titleInput.current!.value,
-              this.contentInput.current!.value
-            );
+            if (
+              this.props.title !== this.titleInput.current!.value ||
+              this.props.content !== this.contentInput.current!.value
+            ) {
+              this.props.submitEntryEdits(
+                this.titleInput.current!.value,
+                this.contentInput.current!.value
+              );
+            }
+            this.props.editEntry(false);
           }}
         />
       );
@@ -68,7 +78,7 @@ export class Entry extends Component<any, any> {
           className="entry-edit-button"
           onClick={e => {
             e.stopPropagation();
-            this.props.onEditButtonClick();
+            this.props.editEntry(true);
           }}
         />
       );
@@ -82,7 +92,7 @@ export class Entry extends Component<any, any> {
         onClick={e => {
           e.stopPropagation();
           if (!this.props.beingEdited) {
-            this.props.onEntryClick();
+            this.props.selectEntry();
           }
         }}
       >
@@ -93,7 +103,7 @@ export class Entry extends Component<any, any> {
               className="entry-delete-button"
               onClick={e => {
                 e.stopPropagation();
-                this.props.onDeleteButtonClick();
+                this.props.deleteEntry();
               }}
             />
             {editButton}

@@ -13,7 +13,7 @@ store.subscribe(() => console.log(store.getState())); // State logging
 
 render(
   <Provider store={store}>
-    <App system={initialState} />
+    <App systemState={initialState} />
   </Provider>,
   document.getElementById("root")
 );

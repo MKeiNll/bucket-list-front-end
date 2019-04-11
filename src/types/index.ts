@@ -8,33 +8,32 @@ export interface Entry {
 
 export interface SystemState {
   entries: Array<Entry>;
-  isLoading: boolean;
-  hasErrored: boolean;
+  loading: boolean;
+  error: boolean;
   isbnImage: string;
 }
 
-export const APP_HAS_ERRORED = "APP_HAS_ERRORED";
-export const APP_IS_LOADING = "APP_IS_LOADING";
-export const ENTRY_FETCH_SUCCESS = "FETCH_SUCCESS";
+export const ERROR = "ERROR";
+export const LOADING = "LOADING";
+export const INITIAL_FETCH_SUCCESS = "INITIAL_FETCH_SUCCESS";
 export const CREATE_ENTRY_SUCCESS = "CREATE_ENTRY_SUCCESS";
 export const DELETE_ENTRY_SUCCESS = "DELETE_ENTRY_SUCCESS";
 export const SELECT_ENTRY_SUCCESS = "SELECT_ENTRY_SUCCESS";
-export const EDIT_ENTRY_SUCCESS = "EDIT_ENTRY_SUCCESS";
+export const SUBMIT_ENTRY_EDITS_SUCCESS = "SUBMIT_ENTRY_EDITS_SUCCESS";
+export const EDIT_ENTRY = "EDIT_ENTRY";
 export const ISBN_IMAGE_FETCH_SUCCESS = "ISBN_IMAGE_FETCH_SUCCESS";
-export const ENTRY_BEING_EDITED = "ENTRY_BEING_EDITED";
 
-interface AppHasErroredAction {
-  type: typeof APP_HAS_ERRORED;
-  hasErrored: boolean;
+interface ErrorAction {
+  type: typeof ERROR;
 }
 
-interface AppIsLoadingAction {
-  type: typeof APP_IS_LOADING;
-  isLoading: boolean;
+interface LoadingAction {
+  type: typeof LOADING;
+  loading: boolean;
 }
 
-interface EntryFetchSuccessAction {
-  type: typeof ENTRY_FETCH_SUCCESS;
+interface InitialFetchSuccessAction {
+  type: typeof INITIAL_FETCH_SUCCESS;
   entries: Array<Entry>;
 }
 
@@ -53,30 +52,31 @@ interface SelectEntrySuccessAction {
   id: number;
 }
 
-interface EditEntrySuccessAction {
-  type: typeof EDIT_ENTRY_SUCCESS;
+interface SubmitEntryEditsSuccessAction {
+  type: typeof SUBMIT_ENTRY_EDITS_SUCCESS;
   id: number;
   title: string;
   content: string;
 }
 
-interface IsbnImageFetchSuccessAction {
+interface EditEntryAction {
+  type: typeof EDIT_ENTRY;
+  id: number;
+  edit: boolean;
+}
+
+interface FetchIsbnImageSuccessAction {
   type: typeof ISBN_IMAGE_FETCH_SUCCESS;
   image: string;
 }
 
-interface EntryBeingEdited {
-  type: typeof ENTRY_BEING_EDITED;
-  id: number;
-}
-
 export type ActionTypes =
-  | AppHasErroredAction
-  | AppIsLoadingAction
-  | EntryFetchSuccessAction
+  | ErrorAction
+  | LoadingAction
+  | InitialFetchSuccessAction
   | CreateEntrySuccessAction
   | DeleteEntrySuccessAction
   | SelectEntrySuccessAction
-  | EditEntrySuccessAction
-  | IsbnImageFetchSuccessAction
-  | EntryBeingEdited;
+  | SubmitEntryEditsSuccessAction
+  | EditEntryAction
+  | FetchIsbnImageSuccessAction;

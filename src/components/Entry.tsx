@@ -20,7 +20,7 @@ interface EntryProps {
   beingEdited: boolean;
 }
 
-export class Entry extends Component<EntryProps, {}> {
+export class Entry extends Component<EntryProps> {
   private titleInput: React.RefObject<HTMLInputElement>;
   private contentInput: React.RefObject<HTMLTextAreaElement>;
   constructor(props: EntryProps) {

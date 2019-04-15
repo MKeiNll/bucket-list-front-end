@@ -11,7 +11,7 @@ interface IsbnFormElements extends HTMLCollection {
   isbnCode: HTMLInputElement;
 }
 
-export class ISBNForm extends React.Component<ISBNFormProps, any> {
+export class ISBNForm extends React.Component<ISBNFormProps> {
   constructor(props: ISBNFormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

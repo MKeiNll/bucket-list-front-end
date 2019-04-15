@@ -11,10 +11,7 @@ interface EntryCreationFormElements extends HTMLCollection {
   entryContent: HTMLInputElement;
 }
 
-export class EntryCreationForm extends React.Component<
-  EntryCreationFormProps,
-  any
-> {
+export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
   constructor(props: EntryCreationFormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

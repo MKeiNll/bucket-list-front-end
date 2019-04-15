@@ -5,7 +5,9 @@ import { Entry } from "./Entry";
 import "../styles/entryList.scss";
 import { EntryCreationForm } from "./EntryCreationForm";
 
-export class EntryList extends Component<any, any> {
+interface EntryListProps {}
+
+export class EntryList extends Component<any> {
   render() {
     return (
       <ul className="entry-list">

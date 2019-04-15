@@ -49,7 +49,7 @@ interface AppOwnProps {
   systemState: SystemState;
 }
 
-class App extends Component<AppProps, {}> {
+class App extends Component<AppProps> {
   render() {
     let loading: JSX.Element;
     let error: JSX.Element;

@@ -5,6 +5,8 @@ import { ISBNForm } from "../components/ISBNForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";
 import { Error } from "../components/Error";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import {
   initialFetch,
@@ -16,7 +18,7 @@ import {
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
-import { SystemState, Entry } from "../types/index";
+import { SystemState } from "../types/index";
 
 interface AppProps {
   systemState: SystemState;
@@ -49,19 +51,19 @@ interface AppOwnProps {
 
 class App extends Component<AppProps, {}> {
   render() {
-    let loading;
-    let error;
+    let loading: JSX.Element;
+    let error: JSX.Element;
 
     if (this.props.systemState.error) {
       error = <Error />;
     } else {
-      error = "";
+      error = <></>;
     }
 
     if (this.props.systemState.loading) {
       loading = <Loading />;
     } else {
-      loading = "";
+      loading = <></>;
     }
 
     return (
@@ -78,7 +80,7 @@ class App extends Component<AppProps, {}> {
         />
         <ISBNForm
           image={this.props.systemState.isbnImage}
-          onSubmit={this.props.fetchIsbnImage}
+          fetchIsbnImage={this.props.fetchIsbnImage}
         />
         <ServerStatistics />
       </div>

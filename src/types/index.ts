@@ -1,4 +1,4 @@
-export interface Entry {
+export interface EntryDAO {
   id: number;
   title: string;
   content: string;
@@ -7,7 +7,7 @@ export interface Entry {
 }
 
 export interface SystemState {
-  entries: Array<Entry>;
+  entries: Array<EntryDAO>;
   loading: boolean;
   error: boolean;
   isbnImage: string;
@@ -34,12 +34,12 @@ interface LoadingAction {
 
 interface InitialFetchSuccessAction {
   type: typeof INITIAL_FETCH_SUCCESS;
-  entries: Array<Entry>;
+  entries: Array<EntryDAO>;
 }
 
 interface CreateEntrySuccessAction {
   type: typeof CREATE_ENTRY_SUCCESS;
-  entry: Entry;
+  entry: EntryDAO;
 }
 
 interface DeleteEntrySuccessAction {

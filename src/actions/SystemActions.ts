@@ -1,4 +1,4 @@
-import { Entry, ERROR, LOADING, INITIAL_FETCH_SUCCESS } from "../types";
+import { EntryDAO, ERROR, LOADING, INITIAL_FETCH_SUCCESS } from "../types";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../reducers/index";
 import { Action } from "redux";
@@ -16,7 +16,7 @@ export function loading(loading: boolean) {
   };
 }
 
-export function initialFetchSuccess(json: Array<Entry>) {
+export function initialFetchSuccess(json: Array<EntryDAO>) {
   return {
     type: INITIAL_FETCH_SUCCESS,
     entries: json
@@ -26,7 +26,7 @@ export function initialFetchSuccess(json: Array<Entry>) {
 export function initialFetch(): ThunkAction<
   void,
   AppState,
-  null,
+  {},
   Action<string>
 > {
   return function(dispatch) {

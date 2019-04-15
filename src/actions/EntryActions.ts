@@ -1,5 +1,5 @@
 import {
-  Entry,
+  EntryDAO,
   CREATE_ENTRY_SUCCESS,
   DELETE_ENTRY_SUCCESS,
   SELECT_ENTRY_SUCCESS,
@@ -11,7 +11,7 @@ import { AppState } from "../reducers/index";
 import { Action } from "redux";
 import { error, loading } from "./SystemActions";
 
-export function createEntrySuccess(entry: Entry) {
+export function createEntrySuccess(entry: EntryDAO) {
   return {
     type: CREATE_ENTRY_SUCCESS,
     entry: entry

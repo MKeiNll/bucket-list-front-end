@@ -1,8 +1,18 @@
 import * as React from "react";
 import "../styles/isbnForm.scss";
+import { fetchIsbnImage } from "../actions/index";
 
-export class ISBNForm extends React.Component<any, any> {
-  constructor(props) {
+interface ISBNFormProps {
+  image: string;
+  fetchIsbnImage: typeof fetchIsbnImage;
+}
+
+interface IsbnFormElements extends HTMLCollection {
+  isbnCode: HTMLInputElement;
+}
+
+export class ISBNForm extends React.Component<ISBNFormProps, any> {
+  constructor(props: ISBNFormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showModalView = this.showModalView.bind(this);
@@ -13,9 +23,10 @@ export class ISBNForm extends React.Component<any, any> {
     document.body.addEventListener("click", this.closeModalView);
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    this.props.onSubmit(event.target.isbnCode.value);
+    let formElements = event.currentTarget.children as IsbnFormElements;
+    this.props.fetchIsbnImage(formElements.isbnCode.value);
   }
 
   showModalView() {
@@ -33,7 +44,7 @@ export class ISBNForm extends React.Component<any, any> {
   }
 
   render() {
-    let bookImage;
+    let bookImage: JSX.Element;
     if (this.props.image != "") {
       bookImage = (
         <img
@@ -43,7 +54,7 @@ export class ISBNForm extends React.Component<any, any> {
         />
       );
     } else {
-      bookImage = "";
+      bookImage = <></>;
     }
 
     return (

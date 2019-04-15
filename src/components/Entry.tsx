@@ -1,24 +1,37 @@
 import * as React from "react";
 import { Component } from "react";
 import "../styles/entry.scss";
+import {
+  deleteEntry,
+  editEntry,
+  selectEntry,
+  submitEntryEdits
+} from "../actions/index";
 
-// interface EntryProps {
-//   deleteEntry:
-// }
+interface EntryProps {
+  id: number;
+  deleteEntry: typeof deleteEntry;
+  selectEntry: typeof selectEntry;
+  editEntry: typeof editEntry;
+  submitEntryEdits: typeof submitEntryEdits;
+  title: string;
+  content: string;
+  selected: boolean;
+  beingEdited: boolean;
+}
 
-export class Entry extends Component<any, any> {
+export class Entry extends Component<EntryProps, {}> {
   private titleInput: React.RefObject<HTMLInputElement>;
   private contentInput: React.RefObject<HTMLTextAreaElement>;
-  constructor(props) {
+  constructor(props: EntryProps) {
     super(props);
-
     this.titleInput = React.createRef();
     this.contentInput = React.createRef();
   }
 
   render() {
-    let entryContent;
-    let editButton;
+    let entryContent: JSX.Element;
+    let editButton: JSX.Element;
     if (this.props.beingEdited) {
       entryContent = (
         <div className="entry-content-container">
@@ -58,11 +71,12 @@ export class Entry extends Component<any, any> {
               this.props.content !== this.contentInput.current!.value
             ) {
               this.props.submitEntryEdits(
+                this.props.id,
                 this.titleInput.current!.value,
                 this.contentInput.current!.value
               );
             }
-            this.props.editEntry(false);
+            this.props.editEntry(this.props.id, false);
           }}
         />
       );
@@ -78,7 +92,7 @@ export class Entry extends Component<any, any> {
           className="entry-edit-button"
           onClick={e => {
             e.stopPropagation();
-            this.props.editEntry(true);
+            this.props.editEntry(this.props.id, true);
           }}
         />
       );
@@ -92,7 +106,7 @@ export class Entry extends Component<any, any> {
         onClick={e => {
           e.stopPropagation();
           if (!this.props.beingEdited) {
-            this.props.selectEntry();
+            this.props.selectEntry(this.props.id);
           }
         }}
       >
@@ -103,7 +117,7 @@ export class Entry extends Component<any, any> {
               className="entry-delete-button"
               onClick={e => {
                 e.stopPropagation();
-                this.props.deleteEntry();
+                this.props.deleteEntry(this.props.id);
               }}
             />
             {editButton}

@@ -1,27 +1,38 @@
 import * as React from "react";
 import "../styles/entryCreationForm.scss";
+import { createEntry } from "../actions/index";
 
-export class EntryCreationForm extends React.Component<any, any> {
-  constructor(props) {
+interface EntryCreationFormProps {
+  createEntry: typeof createEntry;
+}
+
+interface EntryCreationFormElements extends HTMLCollection {
+  entryTitle: HTMLInputElement;
+  entryContent: HTMLInputElement;
+}
+
+export class EntryCreationForm extends React.Component<
+  EntryCreationFormProps,
+  any
+> {
+  constructor(props: EntryCreationFormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    this.props.onSubmit(event.target.title.value, event.target.content.value);
-    event.target.title.value = "";
-    event.target.content.value = "";
+    let formElements = event.currentTarget
+      .children as EntryCreationFormElements;
+    this.props.createEntry(
+      formElements.entryTitle.value,
+      formElements.entryContent.value
+    );
+    formElements.entryTitle.value = "";
+    formElements.entryContent.value = "";
   }
 
   render() {
-    let bookImage;
-    if (this.props.image != "") {
-      bookImage = <img className="bookImage" src={this.props.image} />;
-    } else {
-      bookImage = "";
-    }
-
     return (
       <div className="entry-creation-form">
         <div className="entry-creation-form-title">NEW ENTRY</div>
@@ -30,13 +41,13 @@ export class EntryCreationForm extends React.Component<any, any> {
             className="entry-creation-form-title-input"
             type="text"
             placeholder="Title"
-            name="title"
+            name="entryTitle"
             required
           />
           <textarea
             className="entry-creation-form-content-input"
             placeholder="Content"
-            name="content"
+            name="entryContent"
             required
           />
           <br />

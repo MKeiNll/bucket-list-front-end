@@ -1,10 +1,9 @@
 import * as React from "react";
 import "../styles/isbnForm.scss";
-import { fetchIsbnImage } from "../actions/index";
 
 interface ISBNFormProps {
   image: string;
-  fetchIsbnImage: typeof fetchIsbnImage;
+  fetchIsbnImage: (image: string) => void;
 }
 
 interface IsbnFormElements extends HTMLCollection {

@@ -5,7 +5,7 @@ import { ISBNForm } from "../components/ISBNForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";
 import { Error } from "../components/Error";
-import { AnyAction } from "redux";
+import { Action } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import {
@@ -22,13 +22,13 @@ import { SystemState } from "../types/index";
 
 interface AppProps {
   systemState: SystemState;
-  initialFetch: typeof initialFetch;
-  deleteEntry: typeof deleteEntry;
-  selectEntry: typeof selectEntry;
-  createEntry: typeof createEntry;
+  initialFetch: () => void;
+  deleteEntry: (id: number) => void;
+  selectEntry: (id: number) => void;
+  createEntry: (title: string, content: string) => void;
   editEntry: typeof editEntry;
-  submitEntryEdits: typeof submitEntryEdits;
-  fetchIsbnImage: typeof fetchIsbnImage;
+  submitEntryEdits: (id: number, title: string, content: string) => void;
+  fetchIsbnImage: (image: string) => void;
 }
 
 interface AppStateProps {
@@ -36,13 +36,13 @@ interface AppStateProps {
 }
 
 interface AppDispatchProps {
-  initialFetch: typeof initialFetch;
-  deleteEntry: typeof deleteEntry;
-  selectEntry: typeof selectEntry;
-  createEntry: typeof createEntry;
+  initialFetch: () => void;
+  deleteEntry: (id: number) => void;
+  selectEntry: (id: number) => void;
+  createEntry: (title: string, content: string) => void;
   editEntry: typeof editEntry;
-  submitEntryEdits: typeof submitEntryEdits;
-  fetchIsbnImage: typeof fetchIsbnImage;
+  submitEntryEdits: (id: number, title: string, content: string) => void;
+  fetchIsbnImage: (image: string) => void;
 }
 
 interface AppOwnProps {
@@ -96,7 +96,9 @@ const mapStateToProps = (state: AppState): AppStateProps => ({
   systemState: state.system
 });
 
-const mapDispatchToProps = (dispatch): AppDispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<AppState, {}, Action>
+): AppDispatchProps => ({
   initialFetch: () => dispatch(initialFetch()),
   deleteEntry: (id: number) => dispatch(deleteEntry(id)),
   selectEntry: (id: number) => dispatch(selectEntry(id)),

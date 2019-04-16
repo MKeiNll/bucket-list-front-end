@@ -1,35 +1,26 @@
 import { EntryDAO, ERROR, LOADING, INITIAL_FETCH_SUCCESS } from "../types";
-import { ThunkAction } from "redux-thunk";
+import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
-import { Action } from "redux";
+import { Action, ActionCreator } from "redux";
 
-export function error() {
-  return {
-    type: ERROR
-  };
-}
+export const error: ActionCreator<Action> = () => ({
+  type: ERROR
+});
 
-export function loading(loading: boolean) {
-  return {
-    type: LOADING,
-    loading: loading
-  };
-}
+export const loading: ActionCreator<Action> = (loading: boolean) => ({
+  type: LOADING,
+  loading: loading
+});
 
-export function initialFetchSuccess(json: Array<EntryDAO>) {
-  return {
-    type: INITIAL_FETCH_SUCCESS,
-    entries: json
-  };
-}
+export const initialFetchSuccess: ActionCreator<Action> = (
+  json: Array<EntryDAO>
+) => ({
+  type: INITIAL_FETCH_SUCCESS,
+  entries: json
+});
 
-export function initialFetch(): ThunkAction<
-  void,
-  AppState,
-  {},
-  Action<string>
-> {
-  return function(dispatch) {
+export function initialFetch() {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     let init = { method: "GET" };
     fetch("/ester", init)
       .then(response => {

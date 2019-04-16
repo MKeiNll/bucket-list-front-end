@@ -1,9 +1,8 @@
 import * as React from "react";
 import "../styles/entryCreationForm.scss";
-import { createEntry } from "../actions/index";
 
 interface EntryCreationFormProps {
-  createEntry: typeof createEntry;
+  createEntry: (title: string, content: string) => void;
 }
 
 interface EntryCreationFormElements extends HTMLCollection {

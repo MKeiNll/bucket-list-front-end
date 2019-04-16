@@ -1,19 +1,14 @@
 import * as React from "react";
 import { Component } from "react";
 import "../styles/entry.scss";
-import {
-  deleteEntry,
-  editEntry,
-  selectEntry,
-  submitEntryEdits
-} from "../actions/index";
+import { editEntry } from "../actions/index";
 
 interface EntryProps {
   id: number;
-  deleteEntry: typeof deleteEntry;
-  selectEntry: typeof selectEntry;
+  deleteEntry: (id: number) => void;
   editEntry: typeof editEntry;
-  submitEntryEdits: typeof submitEntryEdits;
+  submitEntryEdits: (id: number, title: string, content: string) => void;
+  selectEntry: (id: number) => void;
   title: string;
   content: string;
   selected: boolean;

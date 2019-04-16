@@ -6,60 +6,49 @@ import {
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY
 } from "../types";
-import { ThunkAction } from "redux-thunk";
+import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
-import { Action } from "redux";
+import { Action, ActionCreator } from "redux";
 import { error, loading } from "./SystemActions";
 
-export function createEntrySuccess(entry: EntryDAO) {
-  return {
-    type: CREATE_ENTRY_SUCCESS,
-    entry: entry
-  };
-}
+export const createEntrySuccess: ActionCreator<Action> = (entry: EntryDAO) => ({
+  type: CREATE_ENTRY_SUCCESS,
+  entry: entry
+});
 
-export function deleteEntrySuccess(id: number) {
-  return {
-    type: DELETE_ENTRY_SUCCESS,
-    id: id
-  };
-}
+export const deleteEntrySuccess: ActionCreator<Action> = (id: number) => ({
+  type: DELETE_ENTRY_SUCCESS,
+  id: id
+});
 
-export function selectEntrySuccess(id: number) {
-  return {
-    type: SELECT_ENTRY_SUCCESS,
-    id: id
-  };
-}
+export const selectEntrySuccess: ActionCreator<Action> = (id: number) => ({
+  type: SELECT_ENTRY_SUCCESS,
+  id: id
+});
 
-export function submitEntryEditsSuccess(
+export const submitEntryEditsSuccess: ActionCreator<Action> = (
   id: number,
   title: string,
   content: string
-) {
-  return {
-    type: SUBMIT_ENTRY_EDITS_SUCCESS,
-    id: id,
-    title: title,
-    content: content
-  };
-}
+) => ({
+  type: SUBMIT_ENTRY_EDITS_SUCCESS,
+  id: id,
+  title: title,
+  content: content
+});
 
-export function editEntry(id: number, edit: boolean) {
-  return {
-    type: EDIT_ENTRY,
-    id: id,
-    edit: edit
-  };
-}
+export const editEntry: ActionCreator<Action> = (
+  id: number,
+  edit: boolean
+) => ({
+  type: EDIT_ENTRY,
+  id: id,
+  edit: edit
+});
 
-export function createEntry(
-  title: string,
-  content: string
-): ThunkAction<void, AppState, null, Action<string>> {
-  return function(dispatch) {
+export function createEntry(title: string, content: string) {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
-    let data = { title: title, content: content };
     let init = { method: "PUT" };
     fetch("/ester?title=" + title + "&content=" + content, init)
       .then(response => {
@@ -78,10 +67,8 @@ export function createEntry(
   };
 }
 
-export function deleteEntry(
-  id: number
-): ThunkAction<void, AppState, null, Action<string>> {
-  return function(dispatch) {
+export function deleteEntry(id: number) {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "DELETE" };
     fetch("/ester/" + id, init)
@@ -96,10 +83,8 @@ export function deleteEntry(
   };
 }
 
-export function selectEntry(
-  id: number
-): ThunkAction<void, AppState, null, Action<string>> {
-  return function(dispatch) {
+export function selectEntry(id: number) {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = {
       method: "POST"
@@ -117,12 +102,8 @@ export function selectEntry(
   };
 }
 
-export function submitEntryEdits(
-  id: number,
-  title: string,
-  content: string
-): ThunkAction<void, AppState, null, Action<string>> {
-  return function(dispatch) {
+export function submitEntryEdits(id: number, title: string, content: string) {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = {
       method: "POST"

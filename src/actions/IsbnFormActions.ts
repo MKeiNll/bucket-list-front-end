@@ -1,20 +1,18 @@
 import { ISBN_IMAGE_FETCH_SUCCESS } from "../types";
-import { ThunkAction } from "redux-thunk";
+import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
-import { Action } from "redux";
+import { Action, ActionCreator } from "redux";
 import { loading, error } from "./SystemActions";
 
-export function fetchIsbnImageSuccess(imageData: string) {
-  return {
-    type: ISBN_IMAGE_FETCH_SUCCESS,
-    image: imageData
-  };
-}
+export const fetchIsbnImageSuccess: ActionCreator<Action> = (
+  imageData: string
+) => ({
+  type: ISBN_IMAGE_FETCH_SUCCESS,
+  image: imageData
+});
 
-export function fetchIsbnImage(
-  isbnCode: string
-): ThunkAction<void, AppState, null, Action<string>> {
-  return function(dispatch) {
+export function fetchIsbnImage(isbnCode: string) {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "GET" };
     fetch("/ester/data/getImageByIsbn?isbnCode=" + isbnCode, init)

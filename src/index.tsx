@@ -4,9 +4,6 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./reducers";
-import { initialState as systemInitialState } from "./reducers/SystemReducer";
-import { initialState as entryInitialState } from "./reducers/EntryReducer";
-import { initialState as isbnInitialState } from "./reducers/IsbnReducer";
 import App from "./containers/App";
 import "./styles/main.scss";
 
@@ -15,11 +12,7 @@ store.subscribe(() => console.log(store.getState())); // State logging
 
 render(
   <Provider store={store}>
-    <App
-      systemState={systemInitialState}
-      entryState={entryInitialState}
-      isbnState={isbnInitialState}
-    />
+    <App />
   </Provider>,
   document.getElementById("root")
 );

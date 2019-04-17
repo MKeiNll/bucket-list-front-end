@@ -54,7 +54,9 @@ export const editEntry: ActionCreator<Action> = (
   edit: edit
 });
 
-export function initialFetch() {
+export function initialFetch(): (
+  dispatch: ThunkDispatch<AppState, {}, Action>
+) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     let init = { method: "GET" };
     fetch("/ester", init)
@@ -70,7 +72,10 @@ export function initialFetch() {
   };
 }
 
-export function createEntry(title: string, content: string) {
+export function createEntry(
+  title: string,
+  content: string
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "PUT" };
@@ -91,7 +96,9 @@ export function createEntry(title: string, content: string) {
   };
 }
 
-export function deleteEntry(id: number) {
+export function deleteEntry(
+  id: number
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "DELETE" };
@@ -107,7 +114,9 @@ export function deleteEntry(id: number) {
   };
 }
 
-export function selectEntry(id: number) {
+export function selectEntry(
+  id: number
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = {
@@ -126,7 +135,11 @@ export function selectEntry(id: number) {
   };
 }
 
-export function submitEntryEdits(id: number, title: string, content: string) {
+export function submitEntryEdits(
+  id: number,
+  title: string,
+  content: string
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = {

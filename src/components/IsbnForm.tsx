@@ -1,9 +1,9 @@
 import * as React from "react";
 import "../styles/isbnForm.scss";
-import { ISBNFormProps, IsbnFormElements } from "../types";
+import { IsbnFormProps, IsbnFormElements } from "../types";
 
-export class ISBNForm extends React.Component<ISBNFormProps> {
-  constructor(props: ISBNFormProps) {
+export class IsbnForm extends React.Component<IsbnFormProps> {
+  constructor(props: IsbnFormProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showModalView = this.showModalView.bind(this);
@@ -36,12 +36,12 @@ export class ISBNForm extends React.Component<ISBNFormProps> {
 
   render() {
     let bookImage: JSX.Element;
-    if (this.props.image != "") {
+    if (this.props.isbnImage != "") {
       bookImage = (
         <img
           onClick={this.showModalView}
           className="isbn-form-image"
-          src={"data:image/jpeg;base64," + this.props.image}
+          src={"data:image/jpeg;base64," + this.props.isbnImage}
         />
       );
     } else {

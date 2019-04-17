@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
 import { EntryList } from "../components/EntryList";
-import { ISBNForm } from "../components/ISBNForm";
+import { IsbnForm } from "../components/IsbnForm";
 import { ServerStatistics } from "../components/ServerStatistics";
 import { Loading } from "../components/Loading";
 import { Error } from "../components/Error";
@@ -18,12 +18,7 @@ import {
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
-import {
-  AppProps,
-  AppStateProps,
-  AppDispatchProps,
-  AppOwnProps
-} from "../types";
+import { AppProps, AppStateProps, AppDispatchProps } from "../types";
 
 class App extends Component<AppProps> {
   render() {
@@ -54,8 +49,8 @@ class App extends Component<AppProps> {
           selectEntry={this.props.selectEntry}
           createEntry={this.props.createEntry}
         />
-        <ISBNForm
-          image={this.props.isbnState.isbnImage}
+        <IsbnForm
+          isbnImage={this.props.isbnState.isbnImage}
           fetchIsbnImage={this.props.fetchIsbnImage}
         />
         <ServerStatistics />
@@ -88,7 +83,7 @@ const mapDispatchToProps = (
   fetchIsbnImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 
-export default connect<AppStateProps, AppDispatchProps, AppOwnProps>(
+export default connect<AppStateProps, AppDispatchProps>(
   mapStateToProps,
   mapDispatchToProps
 )(App);

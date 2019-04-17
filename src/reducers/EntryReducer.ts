@@ -1,6 +1,6 @@
 import {
   EntryState,
-  ActionTypes,
+  EntryActionTypes,
   INITIAL_FETCH_SUCCESS,
   CREATE_ENTRY_SUCCESS,
   DELETE_ENTRY_SUCCESS,
@@ -15,7 +15,7 @@ export const initialState: EntryState = {
 
 export function entryReducer(
   state = initialState,
-  action: ActionTypes
+  action: EntryActionTypes
 ): EntryState {
   switch (action.type) {
     case INITIAL_FETCH_SUCCESS:

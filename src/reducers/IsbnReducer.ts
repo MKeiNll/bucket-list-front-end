@@ -1,6 +1,6 @@
 import {
   IsbnState,
-  ActionTypes,
+  FetchIsbnImageSuccessAction,
   ISBN_IMAGE_FETCH_SUCCESS
 } from "../types/index";
 
@@ -10,7 +10,7 @@ export const initialState: IsbnState = {
 
 export function isbnReducer(
   state = initialState,
-  action: ActionTypes
+  action: FetchIsbnImageSuccessAction
 ): IsbnState {
   switch (action.type) {
     case ISBN_IMAGE_FETCH_SUCCESS:

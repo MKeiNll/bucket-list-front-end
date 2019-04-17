@@ -52,18 +52,17 @@ interface EditEntryAction {
   edit: boolean;
 }
 
-interface FetchIsbnImageSuccessAction {
+export interface FetchIsbnImageSuccessAction {
   type: typeof ISBN_IMAGE_FETCH_SUCCESS;
   image: string;
 }
 
-export type ActionTypes =
-  | ErrorAction
-  | LoadingAction
+export type SystemActionTypes = ErrorAction | LoadingAction;
+
+export type EntryActionTypes =
   | InitialFetchSuccessAction
   | CreateEntrySuccessAction
   | DeleteEntrySuccessAction
   | SelectEntrySuccessAction
   | SubmitEntryEditsSuccessAction
-  | EditEntryAction
-  | FetchIsbnImageSuccessAction;
+  | EditEntryAction;

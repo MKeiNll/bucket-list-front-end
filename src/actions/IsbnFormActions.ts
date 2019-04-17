@@ -1,4 +1,4 @@
-import { ISBN_IMAGE_FETCH_SUCCESS } from "../types";
+import { ISBN_IMAGE_FETCH_SUCCESS } from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
 import { Action, ActionCreator } from "redux";
@@ -11,7 +11,9 @@ export const fetchIsbnImageSuccess: ActionCreator<Action> = (
   image: imageData
 });
 
-export function fetchIsbnImage(isbnCode: string) {
+export function fetchIsbnImage(
+  isbnCode: string
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "GET" };

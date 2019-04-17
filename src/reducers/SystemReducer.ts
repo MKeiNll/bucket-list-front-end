@@ -1,4 +1,4 @@
-import { SystemState, ActionTypes, ERROR, LOADING } from "../types/index";
+import { SystemState, SystemActionTypes, ERROR, LOADING } from "../types/index";
 
 export const initialState: SystemState = {
   loading: true,
@@ -7,7 +7,7 @@ export const initialState: SystemState = {
 
 export function systemReducer(
   state = initialState,
-  action: ActionTypes
+  action: SystemActionTypes
 ): SystemState {
   switch (action.type) {
     case ERROR:

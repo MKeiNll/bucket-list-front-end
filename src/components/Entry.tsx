@@ -1,19 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
 import "../styles/entry.scss";
-import { editEntry } from "../actions/index";
-
-interface EntryProps {
-  id: number;
-  deleteEntry: (id: number) => void;
-  editEntry: typeof editEntry;
-  submitEntryEdits: (id: number, title: string, content: string) => void;
-  selectEntry: (id: number) => void;
-  title: string;
-  content: string;
-  selected: boolean;
-  beingEdited: boolean;
-}
+import { EntryProps } from "../types";
 
 export class Entry extends Component<EntryProps> {
   private titleInput: React.RefObject<HTMLInputElement>;

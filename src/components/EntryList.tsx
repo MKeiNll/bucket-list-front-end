@@ -1,19 +1,9 @@
 import * as React from "react";
 import { Component } from "react";
-import { EntryDAO } from "../types/index";
+import { EntryDAO, EntryListProps } from "../types/index";
 import { Entry } from "./Entry";
 import "../styles/entryList.scss";
 import { EntryCreationForm } from "./EntryCreationForm";
-import { editEntry } from "../actions/index";
-
-interface EntryListProps {
-  entries: Array<EntryDAO>;
-  deleteEntry: (id: number) => void;
-  editEntry: typeof editEntry;
-  submitEntryEdits: (id: number, title: string, content: string) => void;
-  selectEntry: (id: number) => void;
-  createEntry: (title: string, content: string) => void;
-}
 
 export class EntryList extends Component<EntryListProps> {
   render() {

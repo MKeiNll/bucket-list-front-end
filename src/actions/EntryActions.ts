@@ -4,12 +4,20 @@ import {
   DELETE_ENTRY_SUCCESS,
   SELECT_ENTRY_SUCCESS,
   SUBMIT_ENTRY_EDITS_SUCCESS,
-  EDIT_ENTRY
-} from "../types";
+  EDIT_ENTRY,
+  INITIAL_FETCH_SUCCESS
+} from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
 import { Action, ActionCreator } from "redux";
 import { error, loading } from "./SystemActions";
+
+export const initialFetchSuccess: ActionCreator<Action> = (
+  json: Array<EntryDAO>
+) => ({
+  type: INITIAL_FETCH_SUCCESS,
+  entries: json
+});
 
 export const createEntrySuccess: ActionCreator<Action> = (entry: EntryDAO) => ({
   type: CREATE_ENTRY_SUCCESS,
@@ -45,6 +53,22 @@ export const editEntry: ActionCreator<Action> = (
   id: id,
   edit: edit
 });
+
+export function initialFetch() {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
+    let init = { method: "GET" };
+    fetch("/ester", init)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then(response => dispatch(initialFetchSuccess(response)))
+      .then(() => dispatch(loading(false)))
+      .catch(() => dispatch(error()));
+  };
+}
 
 export function createEntry(title: string, content: string) {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {

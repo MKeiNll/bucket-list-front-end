@@ -1,14 +1,6 @@
 import * as React from "react";
 import "../styles/entryCreationForm.scss";
-
-interface EntryCreationFormProps {
-  createEntry: (title: string, content: string) => void;
-}
-
-interface EntryCreationFormElements extends HTMLCollection {
-  entryTitle: HTMLInputElement;
-  entryContent: HTMLInputElement;
-}
+import { EntryCreationFormProps, EntryCreationFormElements } from "../types";
 
 export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
   constructor(props: EntryCreationFormProps) {

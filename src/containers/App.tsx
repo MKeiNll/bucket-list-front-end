@@ -18,36 +18,12 @@ import {
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
-import { SystemState } from "../types/index";
-
-interface AppProps {
-  systemState: SystemState;
-  initialFetch: () => void;
-  deleteEntry: (id: number) => void;
-  selectEntry: (id: number) => void;
-  createEntry: (title: string, content: string) => void;
-  editEntry: typeof editEntry;
-  submitEntryEdits: (id: number, title: string, content: string) => void;
-  fetchIsbnImage: (image: string) => void;
-}
-
-interface AppStateProps {
-  systemState: SystemState;
-}
-
-interface AppDispatchProps {
-  initialFetch: () => void;
-  deleteEntry: (id: number) => void;
-  selectEntry: (id: number) => void;
-  createEntry: (title: string, content: string) => void;
-  editEntry: typeof editEntry;
-  submitEntryEdits: (id: number, title: string, content: string) => void;
-  fetchIsbnImage: (image: string) => void;
-}
-
-interface AppOwnProps {
-  systemState: SystemState;
-}
+import {
+  AppProps,
+  AppStateProps,
+  AppDispatchProps,
+  AppOwnProps
+} from "../types";
 
 class App extends Component<AppProps> {
   render() {
@@ -71,7 +47,7 @@ class App extends Component<AppProps> {
         {loading}
         {error}
         <EntryList
-          entries={this.props.systemState.entries}
+          entries={this.props.entryState.entries}
           deleteEntry={this.props.deleteEntry}
           editEntry={this.props.editEntry}
           submitEntryEdits={this.props.submitEntryEdits}
@@ -79,7 +55,7 @@ class App extends Component<AppProps> {
           createEntry={this.props.createEntry}
         />
         <ISBNForm
-          image={this.props.systemState.isbnImage}
+          image={this.props.isbnState.isbnImage}
           fetchIsbnImage={this.props.fetchIsbnImage}
         />
         <ServerStatistics />
@@ -93,7 +69,9 @@ class App extends Component<AppProps> {
 }
 
 const mapStateToProps = (state: AppState): AppStateProps => ({
-  systemState: state.system
+  systemState: state.systemState,
+  entryState: state.entryState,
+  isbnState: state.isbnState
 });
 
 const mapDispatchToProps = (

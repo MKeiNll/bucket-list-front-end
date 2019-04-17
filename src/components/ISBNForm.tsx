@@ -1,14 +1,6 @@
 import * as React from "react";
 import "../styles/isbnForm.scss";
-
-interface ISBNFormProps {
-  image: string;
-  fetchIsbnImage: (image: string) => void;
-}
-
-interface IsbnFormElements extends HTMLCollection {
-  isbnCode: HTMLInputElement;
-}
+import { ISBNFormProps, IsbnFormElements } from "../types";
 
 export class ISBNForm extends React.Component<ISBNFormProps> {
   constructor(props: ISBNFormProps) {

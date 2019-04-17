@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
 import "../styles/entry.scss";
-import { EntryProps } from "../types";
+import { EntryProps } from "../types/index";
 
 export class Entry extends Component<EntryProps> {
   private titleInput: React.RefObject<HTMLInputElement>;
@@ -49,17 +49,23 @@ export class Entry extends Component<EntryProps> {
           className="entry-submit-button"
           onClick={e => {
             e.stopPropagation();
-            if (
-              this.props.title !== this.titleInput.current!.value ||
-              this.props.content !== this.contentInput.current!.value
-            ) {
-              this.props.submitEntryEdits(
-                this.props.id,
-                this.titleInput.current!.value,
-                this.contentInput.current!.value
-              );
+            let titleValue = this.titleInput.current!.value;
+            let contentValue = this.contentInput.current!.value;
+            if (!titleValue && !contentValue) {
+              console.log("empty note discarded");
+            } else {
+              if (
+                this.props.title !== titleValue ||
+                this.props.content !== contentValue
+              ) {
+                this.props.submitEntryEdits(
+                  this.props.id,
+                  titleValue,
+                  contentValue
+                );
+              }
+              this.props.editEntry(this.props.id, false);
             }
-            this.props.editEntry(this.props.id, false);
           }}
         />
       );

@@ -12,12 +12,18 @@ export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
     event.preventDefault();
     let formElements = event.currentTarget
       .children as EntryCreationFormElements;
-    this.props.createEntry(
-      formElements.entryTitle.value,
-      formElements.entryContent.value
-    );
-    formElements.entryTitle.value = "";
-    formElements.entryContent.value = "";
+    let titleValue = formElements.entryTitle.value;
+    let contentValue = formElements.entryContent.value;
+    if (!titleValue && !contentValue) {
+      console.log("at least one field required");
+    } else {
+      this.props.createEntry(
+        formElements.entryTitle.value,
+        formElements.entryContent.value
+      );
+      formElements.entryTitle.value = "";
+      formElements.entryContent.value = "";
+    }
   }
 
   render() {
@@ -30,13 +36,11 @@ export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
             type="text"
             placeholder="Title"
             name="entryTitle"
-            required
           />
           <textarea
             className="entry-creation-form-content-input"
             placeholder="Content"
             name="entryContent"
-            required
           />
           <br />
           <input

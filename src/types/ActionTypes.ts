@@ -8,6 +8,7 @@ export const DELETE_ENTRY_SUCCESS = "DELETE_ENTRY_SUCCESS";
 export const SELECT_ENTRY_SUCCESS = "SELECT_ENTRY_SUCCESS";
 export const SUBMIT_ENTRY_EDITS_SUCCESS = "SUBMIT_ENTRY_EDITS_SUCCESS";
 export const EDIT_ENTRY = "EDIT_ENTRY";
+export const EMPTY_ENTRY_SUBMITTED = "EMPTY_ENTRY_SUBMITTED";
 export const ISBN_IMAGE_FETCH_SUCCESS = "ISBN_IMAGE_FETCH_SUCCESS";
 
 interface ErrorAction {
@@ -52,6 +53,10 @@ interface EditEntryAction {
   edit: boolean;
 }
 
+interface EmptyEntrySubmittedAction {
+  type: typeof EMPTY_ENTRY_SUBMITTED;
+}
+
 export interface FetchIsbnImageSuccessAction {
   type: typeof ISBN_IMAGE_FETCH_SUCCESS;
   image: string;
@@ -59,10 +64,14 @@ export interface FetchIsbnImageSuccessAction {
 
 export type SystemActionTypes = ErrorAction | LoadingAction;
 
-export type EntryActionTypes =
+export type EntryListActionTypes =
   | InitialFetchSuccessAction
   | CreateEntrySuccessAction
   | DeleteEntrySuccessAction
   | SelectEntrySuccessAction
   | SubmitEntryEditsSuccessAction
   | EditEntryAction;
+
+export type EntryCreationFormActionTypes =
+  | CreateEntrySuccessAction
+  | EmptyEntrySubmittedAction;

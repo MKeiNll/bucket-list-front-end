@@ -38,3 +38,8 @@
   @extend %small-margin-bottom;
   background-color: $entry-creation-form-input-background-color;
 }
+
+.entry-creation-form-warning-message {
+  @extend %small-margin-left;
+  font-weight: bold;
+}

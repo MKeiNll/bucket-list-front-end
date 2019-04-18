@@ -5,7 +5,8 @@ import {
   SELECT_ENTRY_SUCCESS,
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY,
-  INITIAL_FETCH_SUCCESS
+  INITIAL_FETCH_SUCCESS,
+  EMPTY_ENTRY_SUBMITTED
 } from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -52,6 +53,10 @@ export const editEntry: ActionCreator<Action> = (
   type: EDIT_ENTRY,
   id: id,
   edit: edit
+});
+
+export const emptyEntrySubmitted: ActionCreator<Action> = () => ({
+  type: EMPTY_ENTRY_SUBMITTED
 });
 
 export function initialFetch(): (

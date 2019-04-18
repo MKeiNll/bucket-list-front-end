@@ -1,6 +1,6 @@
 import {
-  EntryState,
-  EntryActionTypes,
+  EntryListState,
+  EntryListActionTypes,
   INITIAL_FETCH_SUCCESS,
   CREATE_ENTRY_SUCCESS,
   DELETE_ENTRY_SUCCESS,
@@ -9,14 +9,14 @@ import {
   EDIT_ENTRY
 } from "../types/index";
 
-export const initialState: EntryState = {
+export const initialState: EntryListState = {
   entries: []
 };
 
-export function entryReducer(
+export function entryListReducer(
   state = initialState,
-  action: EntryActionTypes
-): EntryState {
+  action: EntryListActionTypes
+): EntryListState {
   switch (action.type) {
     case INITIAL_FETCH_SUCCESS:
       return { ...state, entries: action.entries };

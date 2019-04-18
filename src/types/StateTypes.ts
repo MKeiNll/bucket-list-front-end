@@ -5,8 +5,12 @@ export interface SystemState {
   error: boolean;
 }
 
-export interface EntryState {
+export interface EntryListState {
   entries: Array<EntryDAO>;
+}
+
+export interface EntryCreationFormState {
+  emptyEntrySubmitted: boolean;
 }
 
 export interface IsbnState {

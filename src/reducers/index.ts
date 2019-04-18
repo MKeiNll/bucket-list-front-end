@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
 import { systemReducer } from "./SystemReducer";
-import { entryReducer } from "./EntryReducer";
+import { entryListReducer } from "./EntryListReducer";
+import { entryCreationFormReducer } from "./EntryCreationFormReducer";
 import { isbnReducer } from "./IsbnReducer";
 
 export const rootReducer = combineReducers({
   systemState: systemReducer,
-  entryState: entryReducer,
+  entryListState: entryListReducer,
+  entryCreationFormState: entryCreationFormReducer,
   isbnState: isbnReducer
 });
 

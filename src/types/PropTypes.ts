@@ -1,18 +1,24 @@
 import { editEntry } from "../actions";
 import { EntryDAO } from "./DaoTypes";
-import { SystemState, EntryState, IsbnState } from ".";
+import {
+  SystemState,
+  EntryListState,
+  EntryCreationFormState,
+  IsbnState
+} from ".";
 
 export interface AppProps extends AppStateProps, AppDispatchProps {}
 
 export interface AppStateProps {
   systemState: SystemState;
-  entryState: EntryState;
+  entryListState: EntryListState;
+  entryCreationFormState: EntryCreationFormState;
   isbnState: IsbnState;
 }
 
 export interface AppDispatchProps
   extends EntryActions,
-    EntryCreationFormProps,
+    EntryCreationFormActions,
     IsbnFormActions {
   initialFetch: () => void;
 }
@@ -22,10 +28,15 @@ export interface EntryProps extends EntryActions, EntryDAO {}
 export interface EntryListProps
   extends EntryCreationFormProps,
     EntryActions,
-    EntryState {}
+    EntryListState {}
 
-export interface EntryCreationFormProps {
+export interface EntryCreationFormProps
+  extends EntryCreationFormActions,
+    EntryCreationFormState {}
+
+interface EntryCreationFormActions {
   createEntry: (title: string, content: string) => void;
+  submitEmptyEntry: () => void;
 }
 
 export interface IsbnFormProps extends IsbnFormActions, IsbnState {}

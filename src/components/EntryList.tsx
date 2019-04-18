@@ -11,7 +11,11 @@ export class EntryList extends Component<EntryListProps> {
       <ul className="entry-list">
         <div className="entry-list-title"> BUCKET LIST </div>
         {this.props.entries.map(this.mapEntries)}
-        <EntryCreationForm createEntry={this.props.createEntry} />
+        <EntryCreationForm
+          submitEmptyEntry={this.props.submitEmptyEntry}
+          emptyEntrySubmitted={this.props.emptyEntrySubmitted}
+          createEntry={this.props.createEntry}
+        />
       </ul>
     );
   }

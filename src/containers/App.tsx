@@ -15,6 +15,7 @@ import {
   createEntry,
   selectEntry,
   submitEntryEdits,
+  emptyEntrySubmitted,
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -42,12 +43,16 @@ class App extends Component<AppProps> {
         {loading}
         {error}
         <EntryList
-          entries={this.props.entryState.entries}
+          entries={this.props.entryListState.entries}
           deleteEntry={this.props.deleteEntry}
           editEntry={this.props.editEntry}
           submitEntryEdits={this.props.submitEntryEdits}
           selectEntry={this.props.selectEntry}
           createEntry={this.props.createEntry}
+          submitEmptyEntry={this.props.submitEmptyEntry}
+          emptyEntrySubmitted={
+            this.props.entryCreationFormState.emptyEntrySubmitted
+          }
         />
         <IsbnForm
           isbnImage={this.props.isbnState.isbnImage}
@@ -65,7 +70,8 @@ class App extends Component<AppProps> {
 
 const mapStateToProps = (state: AppState): AppStateProps => ({
   systemState: state.systemState,
-  entryState: state.entryState,
+  entryListState: state.entryListState,
+  entryCreationFormState: state.entryCreationFormState,
   isbnState: state.isbnState
 });
 
@@ -80,6 +86,7 @@ const mapDispatchToProps = (
   editEntry: (id: number, edit: boolean) => dispatch(editEntry(id, edit)),
   submitEntryEdits: (id: number, title: string, content: string) =>
     dispatch(submitEntryEdits(id, title, content)),
+  submitEmptyEntry: () => dispatch(emptyEntrySubmitted()),
   fetchIsbnImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

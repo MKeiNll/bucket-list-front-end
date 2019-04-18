@@ -15,7 +15,9 @@ export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
     let titleValue = formElements.entryTitle.value;
     let contentValue = formElements.entryContent.value;
     if (!titleValue && !contentValue) {
-      console.log("at least one field required");
+      if (!this.props.emptyEntrySubmitted) {
+        this.props.submitEmptyEntry();
+      }
     } else {
       this.props.createEntry(
         formElements.entryTitle.value,
@@ -48,6 +50,13 @@ export class EntryCreationForm extends React.Component<EntryCreationFormProps> {
             type="submit"
             value="SUBMIT"
           />
+          {this.props.emptyEntrySubmitted ? (
+            <span className="entry-creation-form-warning-message">
+              AT LEAST 1 FIELD REQUIRED
+            </span>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     );

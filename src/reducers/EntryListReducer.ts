@@ -6,7 +6,8 @@ import {
   DELETE_ENTRY_SUCCESS,
   SELECT_ENTRY_SUCCESS,
   SUBMIT_ENTRY_EDITS_SUCCESS,
-  EDIT_ENTRY
+  EDIT_ENTRY,
+  EMPTY_ENTRY_DISCARDED_SUCCESS
 } from "../types/index";
 
 export const initialState: EntryListState = {
@@ -65,6 +66,8 @@ export function entryListReducer(
           }
         })
       };
+    case EMPTY_ENTRY_DISCARDED_SUCCESS:
+      return { ...state };
     default:
       return state;
   }

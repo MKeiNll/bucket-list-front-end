@@ -30,6 +30,7 @@ export class EntryList extends Component<EntryListProps> {
         selectEntry={this.props.selectEntry}
         editEntry={this.props.editEntry}
         submitEntryEdits={this.props.submitEntryEdits}
+        discardEmptyEntry={this.props.discardEmptyEntry}
       />
     );
   };

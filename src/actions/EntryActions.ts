@@ -6,7 +6,8 @@ import {
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY,
   INITIAL_FETCH_SUCCESS,
-  EMPTY_ENTRY_SUBMITTED
+  EMPTY_ENTRY_SUBMITTED,
+  EMPTY_ENTRY_DISCARDED_SUCCESS
 } from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -59,6 +60,13 @@ export const emptyEntrySubmitted: ActionCreator<Action> = () => ({
   type: EMPTY_ENTRY_SUBMITTED
 });
 
+export const emptyEntryDiscardedSuccess: ActionCreator<Action> = (
+  id: number
+) => ({
+  type: EMPTY_ENTRY_DISCARDED_SUCCESS,
+  id: id
+});
+
 export function initialFetch(): (
   dispatch: ThunkDispatch<AppState, {}, Action>
 ) => void {
@@ -102,6 +110,24 @@ export function createEntry(
 }
 
 export function deleteEntry(
+  id: number
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
+    dispatch(loading(true));
+    let init = { method: "DELETE" };
+    fetch("/ester/" + id, init)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+      })
+      .then(() => dispatch(emptyEntryDiscardedSuccess(id)))
+      .then(() => dispatch(loading(false)))
+      .catch(() => dispatch(error()));
+  };
+}
+
+export function discardEmptyEntry(
   id: number
 ): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {

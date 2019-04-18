@@ -50,4 +50,5 @@ interface EntryActions {
   editEntry: typeof editEntry;
   submitEntryEdits: (id: number, title: string, content: string) => void;
   selectEntry: (id: number) => void;
+  discardEmptyEntry: (id: number) => void;
 }

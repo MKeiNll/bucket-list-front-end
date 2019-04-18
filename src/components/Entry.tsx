@@ -52,7 +52,7 @@ export class Entry extends Component<EntryProps> {
             let titleValue = this.titleInput.current!.value;
             let contentValue = this.contentInput.current!.value;
             if (!titleValue && !contentValue) {
-              console.log("empty note discarded");
+              this.props.discardEmptyEntry(this.props.id);
             } else {
               if (
                 this.props.title !== titleValue ||

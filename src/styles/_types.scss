@@ -21,9 +21,14 @@
   padding-left: $tiny-margin;
 }
 
+%tiny-padding-top-left {
+  @extend %tiny-padding-left;
+  padding-top: $tiny-margin;
+}
+
 %small-margin-top-left {
+  @extend %small-margin-left;
   margin-top: $small-margin;
-  margin-left: $small-margin;
 }
 
 %small-margin-bottom {
@@ -39,13 +44,13 @@
 }
 
 %medium-margin-top-left {
+  @extend %medium-margin-left;
   margin-top: $medium-margin;
-  margin-left: $medium-margin;
 }
 
 %medium-margin-left-right {
-  margin-left: $medium-margin;
-  margin-right: $medium-margin;
+  @extend %medium-margin-left;
+  @extend %medium-margin-right;
 }
 
 %medium-margin-left {

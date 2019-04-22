@@ -24,7 +24,7 @@
 .entry-creation-form-content-input {
   @extend %entry-creation-form-input-border;
   @extend %medium-margin-left;
-  @extend %tiny-padding-left;
+  @extend %tiny-padding-top-left;
   @extend %small-margin-bottom;
   background-color: $entry-creation-form-input-background-color;
   height: $entry-creation-form-content-input-height;

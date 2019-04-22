@@ -4,20 +4,18 @@ import { EntryDAO, EntryListProps } from "../types/index";
 import { Entry } from "./Entry";
 import "../styles/entryList.scss";
 import { EntryCreationForm } from "./EntryCreationForm";
+import { List, arrayMove } from "react-movable";
 
-export class EntryList extends Component<EntryListProps> {
-  render() {
-    return (
-      <ul className="entry-list">
-        <div className="entry-list-title"> BUCKET LIST </div>
-        {this.props.entries.map(this.mapEntries)}
-        <EntryCreationForm
-          submitEmptyEntry={this.props.submitEmptyEntry}
-          emptyEntrySubmitted={this.props.emptyEntrySubmitted}
-          createEntry={this.props.createEntry}
-        />
-      </ul>
-    );
+interface asdState {
+  items: JSX.Element[];
+}
+
+export class EntryList extends Component<EntryListProps, asdState> {
+  loads = 0;
+
+  constructor(props: EntryListProps) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   mapEntries = (entry: EntryDAO) => {
@@ -34,4 +32,36 @@ export class EntryList extends Component<EntryListProps> {
       />
     );
   };
+
+  handleChange = function(meta: { oldIndex: number; newIndex: number }) {
+    this.setState(prevState => ({
+      items: arrayMove(prevState.items, meta.oldIndex, meta.newIndex)
+    }));
+  };
+
+  render() {
+    if (this.loads < 2) {
+      this.state = {
+        items: this.props.entries.map(this.mapEntries)
+      };
+      this.loads++;
+    }
+
+    return (
+      <ul className="entry-list">
+        <div className="entry-list-title"> BUCKET LIST </div>
+        <List
+          values={this.state.items}
+          onChange={this.handleChange}
+          renderList={({ children, props }) => <ul {...props}>{children}</ul>}
+          renderItem={({ value, props }) => <li {...props}>{value}</li>}
+        />
+        <EntryCreationForm
+          submitEmptyEntry={this.props.submitEmptyEntry}
+          emptyEntrySubmitted={this.props.emptyEntrySubmitted}
+          createEntry={this.props.createEntry}
+        />
+      </ul>
+    );
+  }
 }

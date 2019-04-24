@@ -1,4 +1,4 @@
-import { editEntry } from "../actions";
+import { editEntry, entryMoved } from "../actions";
 import { EntryDAO } from "./DaoTypes";
 import {
   SystemState,
@@ -18,6 +18,7 @@ export interface AppStateProps {
 
 export interface AppDispatchProps
   extends EntryActions,
+    EntryListActions,
     EntryCreationFormActions,
     IsbnFormActions {
   initialFetch: () => void;
@@ -28,7 +29,8 @@ export interface EntryProps extends EntryActions, EntryDAO {}
 export interface EntryListProps
   extends EntryCreationFormProps,
     EntryActions,
-    EntryListState {}
+    EntryListState,
+    EntryListActions {}
 
 export interface EntryCreationFormProps
   extends EntryCreationFormActions,
@@ -51,4 +53,8 @@ interface EntryActions {
   submitEntryEdits: (id: number, title: string, content: string) => void;
   selectEntry: (id: number) => void;
   discardEmptyEntry: (id: number) => void;
+}
+
+interface EntryListActions {
+  moveEntry: typeof entryMoved;
 }

@@ -7,7 +7,8 @@ import {
   EDIT_ENTRY,
   INITIAL_FETCH_SUCCESS,
   EMPTY_ENTRY_SUBMITTED,
-  EMPTY_ENTRY_DISCARDED_SUCCESS
+  EMPTY_ENTRY_DISCARDED_SUCCESS,
+  ENTRY_MOVED
 } from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -65,6 +66,14 @@ export const emptyEntryDiscardedSuccess: ActionCreator<Action> = (
 ) => ({
   type: EMPTY_ENTRY_DISCARDED_SUCCESS,
   id: id
+});
+
+export const entryMoved: ActionCreator<Action> = (meta: {
+  oldIndex: number;
+  newIndex: number;
+}) => ({
+  type: ENTRY_MOVED,
+  meta: meta
 });
 
 export function initialFetch(): (

@@ -7,8 +7,10 @@ import {
   SELECT_ENTRY_SUCCESS,
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY,
-  EMPTY_ENTRY_DISCARDED_SUCCESS
+  EMPTY_ENTRY_DISCARDED_SUCCESS,
+  ENTRY_MOVED
 } from "../types/index";
+import { arrayMove } from "react-movable";
 
 export const initialState: EntryListState = {
   entries: []
@@ -68,6 +70,15 @@ export function entryListReducer(
       };
     case EMPTY_ENTRY_DISCARDED_SUCCESS:
       return { ...state };
+    case ENTRY_MOVED:
+      return {
+        ...state,
+        entries: arrayMove(
+          state.entries,
+          action.meta.oldIndex,
+          action.meta.newIndex
+        )
+      };
     default:
       return state;
   }

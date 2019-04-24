@@ -17,6 +17,7 @@ import {
   submitEntryEdits,
   emptyEntrySubmitted,
   discardEmptyEntry,
+  entryMoved,
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -55,6 +56,7 @@ class App extends Component<AppProps> {
             this.props.entryCreationFormState.emptyEntrySubmitted
           }
           discardEmptyEntry={this.props.discardEmptyEntry}
+          moveEntry={this.props.moveEntry}
         />
         <IsbnForm
           isbnImage={this.props.isbnState.isbnImage}
@@ -90,6 +92,8 @@ const mapDispatchToProps = (
     dispatch(submitEntryEdits(id, title, content)),
   submitEmptyEntry: () => dispatch(emptyEntrySubmitted()),
   discardEmptyEntry: (id: number) => dispatch(discardEmptyEntry(id)),
+  moveEntry: (meta: { oldIndex: number; newIndex: number }) =>
+    dispatch(entryMoved(meta)),
   fetchIsbnImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

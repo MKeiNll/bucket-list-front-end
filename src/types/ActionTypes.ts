@@ -10,7 +10,7 @@ export const SUBMIT_ENTRY_EDITS_SUCCESS = "SUBMIT_ENTRY_EDITS_SUCCESS";
 export const EDIT_ENTRY = "EDIT_ENTRY";
 export const EMPTY_ENTRY_SUBMITTED = "EMPTY_ENTRY_SUBMITTED";
 export const EMPTY_ENTRY_DISCARDED_SUCCESS = "EMPTY_ENTRY_DISCARDED";
-export const ENTRY_MOVED = "ENTRY_MOVED";
+export const ENTRY_MOVED_SUCCESS = "ENTRY_MOVED_SUCCESS";
 export const ISBN_IMAGE_FETCH_SUCCESS = "ISBN_IMAGE_FETCH_SUCCESS";
 
 interface ErrorAction {
@@ -49,7 +49,7 @@ interface SubmitEntryEditsSuccessAction {
   content: string;
 }
 
-interface EditEntryAction {
+export interface EditEntryAction {
   type: typeof EDIT_ENTRY;
   id: number;
   edit: boolean;
@@ -64,9 +64,9 @@ interface EmptyEntryDiscardedSuccessAction {
   id: number;
 }
 
-interface EntryMovedAction {
-  type: typeof ENTRY_MOVED;
-  meta: { oldIndex: number; newIndex: number };
+interface EntryMovedSuccessAction {
+  type: typeof ENTRY_MOVED_SUCCESS;
+  entries: Array<EntryDAO>;
 }
 
 export interface FetchIsbnImageSuccessAction {
@@ -84,7 +84,7 @@ export type EntryListActionTypes =
   | SubmitEntryEditsSuccessAction
   | EditEntryAction
   | EmptyEntryDiscardedSuccessAction
-  | EntryMovedAction;
+  | EntryMovedSuccessAction;
 
 export type EntryCreationFormActionTypes =
   | CreateEntrySuccessAction

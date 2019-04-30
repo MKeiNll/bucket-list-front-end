@@ -8,9 +8,8 @@ import {
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY,
   EMPTY_ENTRY_DISCARDED_SUCCESS,
-  ENTRY_MOVED
+  ENTRY_MOVED_SUCCESS
 } from "../types/index";
-import { arrayMove } from "react-movable";
 
 export const initialState: EntryListState = {
   entries: []
@@ -22,13 +21,20 @@ export function entryListReducer(
 ): EntryListState {
   switch (action.type) {
     case INITIAL_FETCH_SUCCESS:
-      return { ...state, entries: action.entries };
+    case ENTRY_MOVED_SUCCESS:
+      return {
+        ...state,
+        entries: action.entries.sort(function(a, b) {
+          return b.index - a.index;
+        })
+      };
     case CREATE_ENTRY_SUCCESS:
       return {
         ...state,
         entries: [...state.entries, action.entry]
       };
     case DELETE_ENTRY_SUCCESS:
+    case EMPTY_ENTRY_DISCARDED_SUCCESS:
       return {
         ...state,
         entries: state.entries.filter(entry => {
@@ -67,17 +73,6 @@ export function entryListReducer(
             return entry;
           }
         })
-      };
-    case EMPTY_ENTRY_DISCARDED_SUCCESS:
-      return { ...state };
-    case ENTRY_MOVED:
-      return {
-        ...state,
-        entries: arrayMove(
-          state.entries,
-          action.meta.oldIndex,
-          action.meta.newIndex
-        )
       };
     default:
       return state;

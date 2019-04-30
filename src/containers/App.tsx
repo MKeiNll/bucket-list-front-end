@@ -17,7 +17,7 @@ import {
   submitEntryEdits,
   emptyEntrySubmitted,
   discardEmptyEntry,
-  entryMoved,
+  moveEntry,
   fetchIsbnImage
 } from "../actions/index";
 import { AppState } from "../reducers/index";
@@ -92,8 +92,10 @@ const mapDispatchToProps = (
     dispatch(submitEntryEdits(id, title, content)),
   submitEmptyEntry: () => dispatch(emptyEntrySubmitted()),
   discardEmptyEntry: (id: number) => dispatch(discardEmptyEntry(id)),
-  moveEntry: (meta: { oldIndex: number; newIndex: number }) =>
-    dispatch(entryMoved(meta)),
+  moveEntry: (
+    meta: { oldIndex: number; newIndex: number },
+    totalEntries: number
+  ) => dispatch(moveEntry(meta, totalEntries)),
   fetchIsbnImage: (image: string) => dispatch(fetchIsbnImage(image))
 });
 

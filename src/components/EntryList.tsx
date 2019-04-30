@@ -27,10 +27,15 @@ export class EntryList extends Component<EntryListProps> {
       <ul className="entry-list">
         <div className="entry-list-title"> BUCKET LIST </div>
         <List
+          lockVertically={true}
           values={this.props.entries.map(this.mapEntries)}
-          onChange={this.props.moveEntry}
-          renderList={({ children, props }) => <ul {...props}>{children}</ul>}
-          renderItem={({ value, props }) => <li {...props}>{value}</li>}
+          onChange={meta =>
+            this.props.moveEntry(meta, this.props.entries.length)
+          }
+          renderList={({ children, props }) => <div {...props}>{children}</div>}
+          renderItem={({ value, isDragged, props }) => (
+            <div {...props}>{value}</div>
+          )}
         />
         <EntryCreationForm
           submitEmptyEntry={this.props.submitEmptyEntry}

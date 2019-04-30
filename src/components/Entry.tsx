@@ -87,10 +87,9 @@ export class Entry extends Component<EntryProps> {
       );
     }
     return (
-      <li
-        className="entry"
+      <div
         style={{
-          background: this.props.selected ? "silver" : "whitesmoke"
+          background: "inherit"
         }}
         onClick={e => {
           e.stopPropagation();
@@ -112,7 +111,7 @@ export class Entry extends Component<EntryProps> {
             {editButton}
           </div>
         </div>
-      </li>
+      </div>
     );
   }
 }

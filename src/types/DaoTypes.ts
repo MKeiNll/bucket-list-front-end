@@ -4,4 +4,5 @@ export interface EntryDAO {
   content: string;
   selected: boolean;
   beingEdited: boolean;
+  index: number;
 }

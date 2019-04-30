@@ -8,7 +8,7 @@ import {
   INITIAL_FETCH_SUCCESS,
   EMPTY_ENTRY_SUBMITTED,
   EMPTY_ENTRY_DISCARDED_SUCCESS,
-  ENTRY_MOVED
+  ENTRY_MOVED_SUCCESS
 } from "../types/index";
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../reducers/index";
@@ -68,20 +68,41 @@ export const emptyEntryDiscardedSuccess: ActionCreator<Action> = (
   id: id
 });
 
-export const entryMoved: ActionCreator<Action> = (meta: {
-  oldIndex: number;
-  newIndex: number;
-}) => ({
-  type: ENTRY_MOVED,
-  meta: meta
-});
+export const entryMovedSuccess: ActionCreator<Action> = (
+  entries: Array<EntryDAO>
+) => ({ type: ENTRY_MOVED_SUCCESS, entries: entries });
+
+export function moveEntry(
+  meta: {
+    oldIndex: number;
+    newIndex: number;
+  },
+  totalEntries: number
+): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
+  return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
+    let init = { method: "POST" };
+    // Reverse indexation
+    const from = totalEntries - 1 - meta.oldIndex;
+    const to = totalEntries - 1 - meta.newIndex;
+    fetch("/api/move?from=" + from + "&to=" + to, init)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then(response => dispatch(entryMovedSuccess(response)))
+      .then(() => dispatch(loading(false)))
+      .catch(() => dispatch(error()));
+  };
+}
 
 export function initialFetch(): (
   dispatch: ThunkDispatch<AppState, {}, Action>
 ) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     let init = { method: "GET" };
-    fetch("/ester", init)
+    fetch("/api", init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -101,7 +122,7 @@ export function createEntry(
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "PUT" };
-    fetch("/ester?title=" + title + "&content=" + content, init)
+    fetch("/api?title=" + title + "&content=" + content, init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -124,13 +145,13 @@ export function deleteEntry(
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "DELETE" };
-    fetch("/ester/" + id, init)
+    fetch("/api/" + id, init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
       })
-      .then(() => dispatch(emptyEntryDiscardedSuccess(id)))
+      .then(() => dispatch(deleteEntrySuccess(id)))
       .then(() => dispatch(loading(false)))
       .catch(() => dispatch(error()));
   };
@@ -142,13 +163,13 @@ export function discardEmptyEntry(
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
     dispatch(loading(true));
     let init = { method: "DELETE" };
-    fetch("/ester/" + id, init)
+    fetch("/api/" + id, init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
       })
-      .then(() => dispatch(deleteEntrySuccess(id)))
+      .then(() => dispatch(emptyEntryDiscardedSuccess(id)))
       .then(() => dispatch(loading(false)))
       .catch(() => dispatch(error()));
   };
@@ -162,7 +183,7 @@ export function selectEntry(
     let init = {
       method: "POST"
     };
-    fetch("/ester/" + id + "/select", init)
+    fetch("/api/" + id + "/select", init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -185,7 +206,7 @@ export function submitEntryEdits(
     let init = {
       method: "POST"
     };
-    fetch("/ester/" + id + "/edit?title=" + title + "&content=" + content, init)
+    fetch("/api/" + id + "/edit?title=" + title + "&content=" + content, init)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);

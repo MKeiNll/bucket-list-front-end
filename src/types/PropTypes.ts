@@ -1,4 +1,4 @@
-import { editEntry, entryMoved } from "../actions";
+import { editEntry } from "../actions";
 import { EntryDAO } from "./DaoTypes";
 import {
   SystemState,
@@ -38,7 +38,7 @@ export interface EntryCreationFormProps
 
 interface EntryCreationFormActions {
   createEntry: (title: string, content: string) => void;
-  submitEmptyEntry: () => void;
+  submitEmptyEntry: () => void; ///////// required?
 }
 
 export interface IsbnFormProps extends IsbnFormActions, IsbnState {}
@@ -49,12 +49,15 @@ interface IsbnFormActions {
 
 interface EntryActions {
   deleteEntry: (id: number) => void;
-  editEntry: typeof editEntry;
+  editEntry: typeof editEntry; ///////// required?
   submitEntryEdits: (id: number, title: string, content: string) => void;
   selectEntry: (id: number) => void;
   discardEmptyEntry: (id: number) => void;
 }
 
 interface EntryListActions {
-  moveEntry: typeof entryMoved;
+  moveEntry: (
+    meta: { oldIndex: number; newIndex: number },
+    totalEntries: number
+  ) => void;
 }

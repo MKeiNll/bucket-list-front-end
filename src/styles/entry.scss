@@ -5,6 +5,12 @@
   @extend %center-vertical;
   height: $entry-button-size;
   width: $entry-button-size;
+  border-radius: $entry-button-border-radius;
+  outline: none;
+}
+
+%entry-button::-moz-focus-inner {
+  border: 0;
 }
 
 .entry {
@@ -71,6 +77,11 @@
 
 .entry-edit-button {
   @extend %entry-edit-button-background;
+  @extend %entry-button;
+}
+
+.entry-select-button {
+  @extend %entry-select-button-background;
   @extend %entry-button;
 }
 

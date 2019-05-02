@@ -3,6 +3,7 @@
 .loading {
   @extend %loading-background;
   @extend %absolute-screen-center;
+  @extend %absolute-top;
   width: $loading-size;
   height: $loading-size;
 }

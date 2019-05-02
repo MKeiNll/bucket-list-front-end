@@ -17,6 +17,10 @@
   transform: translate(-50%, -50%);
 }
 
+%absolute-top {
+  z-index: 100;
+}
+
 %tiny-padding-left {
   padding-left: $tiny-margin;
 }

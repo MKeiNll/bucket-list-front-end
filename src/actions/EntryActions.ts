@@ -80,6 +80,7 @@ export function moveEntry(
   totalEntries: number
 ): (dispatch: ThunkDispatch<AppState, {}, Action>) => void {
   return (dispatch: ThunkDispatch<AppState, {}, Action>) => {
+    dispatch(loading(true));
     let init = { method: "POST" };
     // Reverse indexation
     const from = totalEntries - 1 - meta.oldIndex;

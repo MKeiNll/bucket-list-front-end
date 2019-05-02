@@ -8,7 +8,8 @@ import {
   SUBMIT_ENTRY_EDITS_SUCCESS,
   EDIT_ENTRY,
   EMPTY_ENTRY_DISCARDED_SUCCESS,
-  ENTRY_MOVED_SUCCESS
+  ENTRY_MOVED_SUCCESS,
+  EntryDAO
 } from "../types/index";
 
 export const initialState: EntryListState = {
@@ -24,14 +25,12 @@ export function entryListReducer(
     case ENTRY_MOVED_SUCCESS:
       return {
         ...state,
-        entries: action.entries.sort(function(a, b) {
-          return b.index - a.index;
-        })
+        entries: sortEntries(action.entries)
       };
     case CREATE_ENTRY_SUCCESS:
       return {
         ...state,
-        entries: [...state.entries, action.entry]
+        entries: sortEntries([...state.entries, action.entry])
       };
     case DELETE_ENTRY_SUCCESS:
     case EMPTY_ENTRY_DISCARDED_SUCCESS:
@@ -78,3 +77,9 @@ export function entryListReducer(
       return state;
   }
 }
+
+const sortEntries = function(entries: Array<EntryDAO>) {
+  return entries.sort(function(a, b) {
+    return b.index - a.index;
+  });
+};

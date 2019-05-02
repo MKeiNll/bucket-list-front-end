@@ -33,9 +33,7 @@ export class EntryList extends Component<EntryListProps> {
             this.props.moveEntry(meta, this.props.entries.length)
           }
           renderList={({ children, props }) => <div {...props}>{children}</div>}
-          renderItem={({ value, isDragged, props }) => (
-            <div {...props}>{value}</div>
-          )}
+          renderItem={({ value, props }) => <div {...props}>{value}</div>}
         />
         <EntryCreationForm
           submitEmptyEntry={this.props.submitEmptyEntry}

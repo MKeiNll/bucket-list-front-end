@@ -25,7 +25,7 @@ $error-container-background-color: darkSalmon;
 
 %entry-delete-button-background {
   background-color: transparent;
-  background-image: url("res/delete-button.png");
+  background-image: url("res/delete_button.png");
   background-position: center;
   background-size: cover;
 }
@@ -34,7 +34,15 @@ $error-container-background-color: darkSalmon;
   background-color: transparent;
   background-image: url("res/edit_button.png");
   background-position: center;
-  background-size: 75%;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+%entry-select-button-background {
+  background-color: transparent;
+  background-image: url("res/select_button.png");
+  background-position: center;
+  background-size: 60%;
   background-repeat: no-repeat;
 }
 
@@ -42,7 +50,7 @@ $error-container-background-color: darkSalmon;
   background-color: transparent;
   background-image: url("res/submit_button.png");
   background-position: center;
-  background-size: 75%;
+  background-size: 60%;
   background-repeat: no-repeat;
 }
 

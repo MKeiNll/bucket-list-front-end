@@ -1,8 +1,9 @@
 $root-container-min-width: 450px;
 $root-container-max-width: 800px;
-$entry-content-container-width: 80%;
+$entry-content-container-width: 70%;
 $entry-button-container-width: 100% - $entry-content-container-width;
-$entry-button-size: 50px;
+$entry-button-size: 38px;
+$entry-button-border-radius: $entry-button-size / 2;
 $entry-content-edit-form-height: 80px;
 $entry-creation-form-title-input-height: 20px;
 $entry-creation-form-title-input-width: 40%;

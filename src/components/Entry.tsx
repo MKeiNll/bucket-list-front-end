@@ -28,6 +28,7 @@ export class Entry extends Component<EntryProps> {
               e.stopPropagation();
             }}
             defaultValue={this.props.title}
+            maxLength={255}
             required
           />
           <textarea
@@ -40,6 +41,7 @@ export class Entry extends Component<EntryProps> {
             onClick={e => {
               e.stopPropagation();
             }}
+            maxLength={255}
             required
           />
         </div>
@@ -88,14 +90,9 @@ export class Entry extends Component<EntryProps> {
     }
     return (
       <div
+        className="entry"
         style={{
-          background: "inherit"
-        }}
-        onClick={e => {
-          e.stopPropagation();
-          if (!this.props.beingEdited) {
-            this.props.selectEntry(this.props.id);
-          }
+          background: this.props.selected ? "silver" : "whitesmoke"
         }}
       >
         <div className="entry-container">
@@ -109,6 +106,13 @@ export class Entry extends Component<EntryProps> {
               }}
             />
             {editButton}
+            <button
+              className="entry-select-button"
+              onClick={e => {
+                e.stopPropagation();
+                this.props.selectEntry(this.props.id);
+              }}
+            />
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ export const ISBN_IMAGE_FETCH_SUCCESS = "ISBN_IMAGE_FETCH_SUCCESS";
 
 interface ErrorAction {
   type: typeof ERROR;
+  error: Error;
 }
 
 interface LoadingAction {
@@ -34,7 +35,7 @@ interface CreateEntrySuccessAction {
 
 interface DeleteEntrySuccessAction {
   type: typeof DELETE_ENTRY_SUCCESS;
-  id: number;
+  entries: Array<EntryDAO>;
 }
 
 interface SelectEntrySuccessAction {
@@ -61,7 +62,7 @@ interface EmptyEntrySubmittedAction {
 
 interface EmptyEntryDiscardedSuccessAction {
   type: typeof EMPTY_ENTRY_DISCARDED_SUCCESS;
-  id: number;
+  entries: Array<EntryDAO>;
 }
 
 interface EntryMovedSuccessAction {

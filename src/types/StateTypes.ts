@@ -2,7 +2,7 @@ import { EntryDAO } from "./DaoTypes";
 
 export interface SystemState {
   loading: boolean;
-  error: boolean;
+  error?: Error;
 }
 
 export interface EntryListState {

@@ -23,6 +23,8 @@ export function entryListReducer(
   switch (action.type) {
     case INITIAL_FETCH_SUCCESS:
     case ENTRY_MOVED_SUCCESS:
+    case DELETE_ENTRY_SUCCESS:
+    case EMPTY_ENTRY_DISCARDED_SUCCESS:
       return {
         ...state,
         entries: sortEntries(action.entries)
@@ -31,14 +33,6 @@ export function entryListReducer(
       return {
         ...state,
         entries: sortEntries([...state.entries, action.entry])
-      };
-    case DELETE_ENTRY_SUCCESS:
-    case EMPTY_ENTRY_DISCARDED_SUCCESS:
-      return {
-        ...state,
-        entries: state.entries.filter(entry => {
-          return entry.id !== action.id;
-        })
       };
     case SELECT_ENTRY_SUCCESS:
       return {

@@ -61,3 +61,7 @@ interface EntryListActions {
     totalEntries: number
   ) => void;
 }
+
+export interface ErrorProps {
+  error: Error;
+}

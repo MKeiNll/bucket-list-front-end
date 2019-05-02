@@ -27,9 +27,11 @@ export const createEntrySuccess: ActionCreator<Action> = (entry: EntryDAO) => ({
   entry: entry
 });
 
-export const deleteEntrySuccess: ActionCreator<Action> = (id: number) => ({
+export const deleteEntrySuccess: ActionCreator<Action> = (
+  entries: Array<EntryDAO>
+) => ({
   type: DELETE_ENTRY_SUCCESS,
-  id: id
+  entries: entries
 });
 
 export const selectEntrySuccess: ActionCreator<Action> = (id: number) => ({
@@ -62,10 +64,10 @@ export const emptyEntrySubmitted: ActionCreator<Action> = () => ({
 });
 
 export const emptyEntryDiscardedSuccess: ActionCreator<Action> = (
-  id: number
+  entries: Array<EntryDAO>
 ) => ({
   type: EMPTY_ENTRY_DISCARDED_SUCCESS,
-  id: id
+  entries: entries
 });
 
 export const entryMovedSuccess: ActionCreator<Action> = (
@@ -94,7 +96,7 @@ export function moveEntry(
       })
       .then(response => dispatch(entryMovedSuccess(response)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -112,7 +114,7 @@ export function initialFetch(): (
       })
       .then(response => dispatch(initialFetchSuccess(response)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -136,7 +138,7 @@ export function createEntry(
       })
       .then(response => dispatch(createEntrySuccess(response)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -151,10 +153,11 @@ export function deleteEntry(
         if (!response.ok) {
           throw Error(response.statusText);
         }
+        return response.json();
       })
-      .then(() => dispatch(deleteEntrySuccess(id)))
+      .then(response => dispatch(deleteEntrySuccess(response)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -169,10 +172,11 @@ export function discardEmptyEntry(
         if (!response.ok) {
           throw Error(response.statusText);
         }
+        return response.json();
       })
-      .then(() => dispatch(emptyEntryDiscardedSuccess(id)))
+      .then(response => dispatch(emptyEntryDiscardedSuccess(response)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -193,7 +197,7 @@ export function selectEntry(
       })
       .then(response => dispatch(selectEntrySuccess(response.id)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }
 
@@ -215,6 +219,6 @@ export function submitEntryEdits(
       })
       .then(() => dispatch(submitEntryEditsSuccess(id, title, content)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }

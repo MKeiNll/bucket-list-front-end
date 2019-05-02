@@ -26,6 +26,6 @@ export function fetchIsbnImage(
       })
       .then(response => dispatch(fetchIsbnImageSuccess(response.imageData)))
       .then(() => dispatch(loading(false)))
-      .catch(() => dispatch(error()));
+      .catch(e => dispatch(error(e)));
   };
 }

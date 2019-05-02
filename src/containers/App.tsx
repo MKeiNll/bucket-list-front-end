@@ -25,19 +25,15 @@ import { AppProps, AppStateProps, AppDispatchProps } from "../types";
 
 class App extends Component<AppProps> {
   render() {
-    let loading: JSX.Element;
-    let error: JSX.Element;
+    let loading: JSX.Element = <></>;
+    let error: JSX.Element = <></>;
 
     if (this.props.systemState.error) {
-      error = <Error />;
+      error = <Error error={this.props.systemState.error} />;
     } else {
-      error = <></>;
-    }
-
-    if (this.props.systemState.loading) {
-      loading = <Loading />;
-    } else {
-      loading = <></>;
+      if (this.props.systemState.loading) {
+        loading = <Loading />;
+      }
     }
 
     return (
